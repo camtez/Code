@@ -1,0 +1,213 @@
+<script>
+
+    var Webflow = Webflow || [];
+    
+    Webflow.push(function () {
+      // DOMready has fired
+      // May now use jQuery and Webflow API
+      
+      // prefill forms other info
+      $("#formOtherNav").val("SU");
+      $("#formOtherFooter").val("SU");
+      
+      // API calls
+      
+      var i = 0;
+      var defaultLoadingTexts = ['Loading.', 'Loading..', 'Loading...'];
+      var loadingIndex = 0;
+      var x = "";
+
+      function startLoadingAnimation(elementId, loadingTexts) {
+        return setInterval(function() {
+            loadingIndex = (loadingIndex + 1) % loadingTexts.length;
+            $("#" + elementId).text(loadingTexts[loadingIndex]);
+        }, 1000);
+      }
+
+      function pipedreamSteve(x,i,outputElement,progressElement,nextQuestion,loadingInterval) {
+        var webhook = 'https://eouv4h921hkuwbt.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=' + encodeURIComponent(i);
+        fetch(webhook)
+            .then(response => response.json())
+            .then(data => {
+              // On success, stop the loading texts and show the data
+              clearInterval(loadingInterval);
+              let formattedText = data.result.replace(/\n/g, '<br>');
+              $(outputElement).html(formattedText);
+              $(progressElement).hide();
+              $(nextQuestion).css("display", "flex");
+            })
+            .catch(error => {
+              // On error, stop the loading texts and show an error message
+              clearInterval(loadingInterval);
+              $(outputElement).text('Error: ' + error.toString());
+              $(outputElement).css('color', '#DE3021');
+              console.log('error');
+            });
+      }
+    
+      // Entering domain -> message0
+      $('#enter').click(function() {
+        i = 0;
+        x = $("#domain").val().trim();
+        $("#message0").css("display", "flex");
+        setTimeout(() => {
+            $("#filler0").css("width", "100%");
+        }, 50);  // 50ms delay
+
+        // Check if x is not empty
+        if (x === '') {
+            $("#output0").text('Please enter a domain');
+            $("#output0").css('color', '#DE3021');
+            console.log('x is empty')
+            return; // Exit the function early
+        }
+    
+        // Show loading text
+        $("#output0").css('color', 'black');
+        //$("#output0").text(loadingTexts[loadingIndex]);
+
+        $("#question1").hide();
+        $("#question2").hide();
+        $("#question3").hide();
+        $("#message1").hide();
+        $("#message2").hide();
+        $("#message3").hide();
+    
+        // Start the interval to cycle through the loading texts
+        var loadingInterval = startLoadingAnimation("output0",loadingTexts0);
+    
+        // PREPARING DATA
+    
+        // If the input doesn't start with 'http://' or 'https://', add 'https://'
+        if (!x.startsWith('http://') && !x.startsWith('https://')) {
+            x = 'https://' + x;
+        }
+        // Remove anything after '.com' or other domain extensions
+        var matches = x.match(/https:\/\/[^/]+/);
+        if (matches) {
+            x = matches[0];
+        }
+
+        pipedreamSteve(x,i,'#output0','#progressBar0','#question1',loadingInterval);
+      });
+        
+
+      // Subscribing to newsletter -> message1
+      $('#subscribe').click(function() {
+        i = 1;
+        var email = $("#email").val().trim();
+        $("#message1").css("display", "flex");
+        setTimeout(() => {
+            $("#filler1").css("width", "100%");
+        }, 50);  // 50ms delay
+
+        // Check if email is not empty
+        if (email === '') {
+            $("#output1").text('Please enter a valid email address');
+            $("#output1").css('color', '#DE3021');
+            console.log('email is empty')
+            return; // Exit the function early
+        }
+
+        $("#output1").css('color', 'black');
+        //$("#output1").text(loadingTexts[loadingIndex]);
+        var loadingInterval = startLoadingAnimation("output1", loadingTexts1); // Loading text
+
+        $("#newsletterText").text('Successfully signed up to the newsletter!');
+        $('#emailInput').hide();
+
+        // Start Make automation to collect email
+        var webhook = 'https://hook.us1.make.com/pl17c96gsqf34sgimjjj1e7w6vqpmjnl/?email=' + encodeURIComponent(email) + '&x=' + encodeURIComponent(x) + '&other=' + encodeURIComponent('AI');
+        console.log(webhook);  
+        fetch(webhook);
+
+        pipedreamSteve(x,i,'#output1','#progressBar1','#question2',loadingInterval);
+      });
+
+      function copyToClipboard(text) {
+        var sampleTextarea = document.createElement("textarea");
+        document.body.appendChild(sampleTextarea);
+        sampleTextarea.value = text; //save main text in it
+        sampleTextarea.select(); //select textarea contenrs
+        document.execCommand("copy");
+        document.body.removeChild(sampleTextarea);
+      }
+      
+      // Sharing -> Message2
+      function startShare() {
+
+        // Save to clipboard
+        copyToClipboard("Check this out: conversionexamples.com/ai")
+
+        $("#question2v1").hide();
+        $("#question2v2").css("display", "flex");
+
+        $("#qtext2").css('color', 'black');
+
+        // Reset the loading index
+        loadingIndex = 0;
+        var loadingInterval = startLoadingAnimation("qtext2", sharingTexts);
+
+        // After 15 seconds, stop the loading texts and show the confirmation message
+        setTimeout(function() {
+            clearInterval(loadingInterval);
+            $("#shareConfirm").show();
+            $("#qtext2").text('We rely on an honesty system. Did you share the link?');
+        }, 15000);
+      }
+
+      $('#share1').click(startShare)
+      $('#share2').click(function() { // Linkedin
+        startShare();
+        const linkedinURL = 'https://www.linkedin.com/feed/?shareActive&mini=true&text=' + encodeURIComponent('Insanely great, as Steve would say. Check this out if you make products: conversionexamples.com/ai');
+        window.open(linkedinURL, '_blank');
+      });
+      $('#share3').click(function() { // Twitter
+        startShare();
+        const twitterURL = 'http://twitter.com/share?url=' + encodeURIComponent('Can AI think different? Try for yourself: conversionexamples.com/ai');
+        window.open(twitterURL, '_blank');
+      });
+      $('#share4').click(startShare) // Copy to clipboard
+
+      // Share confirm
+      $('#shareConfirm').click(function() {
+        i = 2;
+
+        $("#message2").css("display", "flex");
+        setTimeout(() => {
+            $("#filler2").css("width", "100%");
+        }, 50);  // 50ms delay
+        $("#qtext2").text('Successfully shared!');
+        $('#shareConfirm').hide();
+
+        var loadingInterval = startLoadingAnimation("output2", loadingTexts2);
+
+        pipedreamSteve(x,i,'#output2','#progressBar2','#question3',loadingInterval);
+
+        // prep Stripe link
+        var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x);
+          fetch(webhook)
+            .then(response => response.json())
+            .then(data => {
+              console.log(data.result);
+              let url = data.result;
+              $("#getmore").attr("href", url); // set #getmore link to returned value
+            })
+            .catch(error => {
+              // On error, stop the loading texts and show an error message
+              clearInterval(loadingInterval);
+              $(outputElement).text('Error: ' + error.toString());
+              $(outputElement).css('color', '#DE3021');
+              console.log('error');
+            });
+
+      });
+      
+      // Get 99 ideas
+      $('#getmore').click(function() {
+        $("#message3").css("display", "flex");
+      });
+    
+    });
+    
+    </script>
