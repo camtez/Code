@@ -10,6 +10,8 @@
       $("#formOtherNav").val("SU");
       $("#formOtherFooter").val("SU");
 
+      console.log("Hello");
+
 
       // Get URL parametres
       var params = new URLSearchParams(window.location.search);
@@ -53,12 +55,10 @@
         $("#message0").css("display", "flex");
         startLoadingBar('#progressBar0','#filler0');
 
-
         // Style input bar
         $("#enter").text("Loading...");
         $("#enter").css("background-color", "#E9F0EC");
         $("#domain").css("border-color", "#E9F0EC");
-
 
         // Check if x is not empty
         if (x === '') {
@@ -240,7 +240,7 @@
             });
 
             // Prep share link - remove 'rec from rId'
-            // ***
+            // ******
 
             // Prep Stripe link
             var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x);
