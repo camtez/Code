@@ -50,8 +50,10 @@
     
       // STEP 1: Entering domain -> message0
       $('#enter').click(function() {
+        console.log('clicked');
         i = 0;
         x = $("#domain").val().trim();
+        console.log(x);
         $("#message0").css("display", "flex");
         startLoadingBar('#progressBar0','#filler0');
 
