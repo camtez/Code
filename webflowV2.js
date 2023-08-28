@@ -51,15 +51,15 @@
       }
     
       // STEP 1: Entering domain -> message0
-      $('#enter').on('click', function() {
+      $('#enter1').on('click', function() {
         i = 0;
         x = $("#domain").val().trim();
         $("#message0").css("display", "flex");
         startLoadingBar('#progressBar0','#filler0');
 
         // Style input bar
-        $("#enter").text("Loading...");
-        $("#enter").css("background-color", "#E9F0EC");
+        $("#enter1").text("Loading...");
+        $("#enter1").css("background-color", "#E9F0EC");
         $("#domain").css("border-color", "#E9F0EC");
 
         // Check if x is not empty
@@ -101,13 +101,13 @@
               $("#output0").html(formattedText);
               $("#progressBar0").hide();
               $("#question1").css("display", "flex");
-              $("#enter").hide();
+              $("#enter1").hide();
             })
             .catch(error => {
               clearInterval(loadingInterval); // Stop loading message
               $("#output0").text(errorMessage);
               $("#output0").css('color', '#DE3021');
-              $("#enter").text("Try Again");
+              $("#enter1").text("Try Again");
             });
 
 
