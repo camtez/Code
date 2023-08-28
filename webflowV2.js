@@ -48,7 +48,6 @@
         }, 50);  // 50ms delay
       }
     
-      /*
       // STEP 1: Entering domain -> message0
       $('#enter1').on('click', function() {
         i = 0;
@@ -137,11 +136,8 @@
                 $("#output0-5").show();
                 $("#continueReading2").show();
                 });
-            
-            });
         }, 6000);  // 5 second delay
-
-        */
+      });
 
       // STEP 2: Subscribing
 
