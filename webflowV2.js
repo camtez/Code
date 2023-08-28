@@ -102,7 +102,37 @@
               $("#progressBar0").hide();
               $("#question1").css("display", "flex");
               $("#enter").hide();
+              
+              // Show preview message
+              setTimeout(() => {
+                $("#message0-5").css("display", "flex");
+            
+                // Pipedream First Preview
+                webhook = 'https://eo7vbf3v6550my9.m.pipedream.net/?x=' + encodeURIComponent(x);
+                fetch(webhook)
+                    .then(response => response.json())
+                    .then(data => {
+                    let formattedText = data.idea;
+                    id = data.id;
+                    companyName = data.name;
+                    $("#typingAnimation").hide();
+                    $("#output0-5").html(formattedText);
+                    $("#message0-5").css("display", "flex");
+                    $("typingDiv").css("width", "100%");
+                    $("#output0-5").show();
+                    $("#continueReading2").show();
+                    })
+                    .catch(error => {
+                    $("#typingAnimation").hide();
+                    $("#output0-5").html("There's another idea where that came from.");
+                    $("#continueReading2").text("...click here to get another idea");
+                    $("#message0-5").css("display", "flex");
+                    $("#output0-5").show();
+                    $("#continueReading2").show();
+                    });
+              }, 6000);  // 6 second delay
             })
+            
             .catch(error => {
               clearInterval(loadingInterval); // Stop loading message
               $("#output0").text(errorMessage);
@@ -110,36 +140,8 @@
               $("#enter").text("Try Again");
             });
 
+          });
 
-        // Show preview message
-        setTimeout(() => {
-            $("#message0-5").css("display", "flex");
-        
-            // Pipedream First Preview
-            webhook = 'https://eo7vbf3v6550my9.m.pipedream.net/?x=' + encodeURIComponent(x);
-            fetch(webhook)
-                .then(response => response.json())
-                .then(data => {
-                let formattedText = data.idea;
-                id = data.id;
-                companyName = data.name;
-                $("#typingAnimation").hide();
-                $("#output0-5").html(formattedText);
-                $("#message0-5").css("display", "flex");
-                $("typingDiv").css("width", "100%");
-                $("#output0-5").show();
-                $("#continueReading2").show();
-                })
-                .catch(error => {
-                $("#typingAnimation").hide();
-                $("#output0-5").html("There's another idea where that came from.");
-                $("#continueReading2").text("...click here to get another idea");
-                $("#message0-5").css("display", "flex");
-                $("#output0-5").show();
-                $("#continueReading2").show();
-                });
-        }, 6000);  // 5 second delay
-      });
 
       // STEP 2: Subscribing
 
