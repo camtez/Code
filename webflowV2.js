@@ -30,6 +30,7 @@
       let id = "";
       let companyName = "";
       let contactId = "";
+      let loadingInterval;
 
 
       // Reusable functions
@@ -80,7 +81,7 @@
         $("#message3").hide();
     
         // Start the interval to cycle through the loading texts
-        var loadingInterval = startLoadingAnimation("output0",loadingTexts0);
+        loadingInterval = startLoadingAnimation("output0",loadingTexts0);
     
         // Preparing data
         if (!x.startsWith('http://') && !x.startsWith('https://')) { // If the input doesn't start with 'http://' or 'https://', add 'https://'
@@ -143,6 +144,11 @@
 
           });
 
+      // Continue reading first message
+      $('#continueReading').click(function() {
+        $('#continueReading').hide();
+        $("#output0").css("max-height", "none");
+      });
 
       // STEP 2: Subscribing
 
@@ -174,7 +180,7 @@
         startLoadingBar('#progressBar0-5','#filler0-5');
 
         setTimeout(() => {
-            var loadingInterval = startLoadingAnimation("output0-5", loadingTexts1); // Loading text starts after 1.5 seconds
+            loadingInterval = startLoadingAnimation("output0-5", loadingTexts1); // Loading text starts after 1.5 seconds
         }, 1500);
 
         // Make automation to signup email
@@ -195,17 +201,16 @@
               let formattedText = data.result;
               $("#output0-5").html(formattedText);
               $('#progressBar0-5').hide();
+              // Load more tips div
+              setTimeout(() => {
+                $("#helpMessageMore").text('Select your #1 priority for '+ companyName +':');
+                $("#messageMore").css("display", "flex");
+              }, 3000); 
             })
             .catch(error => {
               clearInterval(loadingInterval);
               $("#output0-5").html(errorMessage);
             });
-
-        // Load more tips div
-        setTimeout(() => {
-            $("#helpMessageMore").text('Select your #1 priority for '+ companyName +':');
-            $("#messageMore").css("display", "flex");
-        }, 3000); 
 
       });
 
@@ -219,7 +224,7 @@
             $(selectedID).css('background-color', '#E9F0EC');
 
             startLoadingBar('#progressBar1','#filler1');
-            var loadingInterval = startLoadingAnimation("output1", loadingTexts2);
+            loadingInterval = startLoadingAnimation("output1", loadingTexts2);
             
             // Pipedream Chosen Previews
             webhook = 'https://eo9ypifoenuozi1.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[2]) + '&contact=' + encodeURIComponent(contactId);
@@ -249,12 +254,10 @@
             fetch(webhook)
                 .then(response => response.json())
                 .then(data => {
-                console.log(data.result);
                 let url = data.result;
                 $("#getmore").attr("href", url); // set #getmore link to returned value
                 })
                 .catch(error => {
-                // On error, stop the loading texts and show an error message
                 clearInterval(loadingInterval);
                 $(outputElement).text('Error: ' + error.toString());
                 $(outputElement).css('color', '#DE3021');
