@@ -190,7 +190,6 @@
         webhook = 'https://eo600fsvd2gwh8n.m.pipedream.net/?x=' + encodeURIComponent(x) + '&r=' + encodeURIComponent(referrer);
         fetch(webhook)
             .then(response => response.json())
-              console.log()
             .then(data => {
               clearInterval(loadingInterval);
               let formattedText = data.result;
