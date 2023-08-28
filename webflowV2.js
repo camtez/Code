@@ -1,4 +1,3 @@
-<script>
 
     var Webflow = Webflow || [];
     
@@ -303,4 +302,3 @@
 
     });
     
-    </script>
