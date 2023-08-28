@@ -100,6 +100,7 @@
               let formattedText = data.result.replace(/\n/g, '<br>');
               $("#output0").html(formattedText);
               $("#progressBar0").hide();
+              $("#continueReading").show();
               $("#question1").css("display", "flex");
               $("#enter").hide();
               
@@ -116,9 +117,9 @@
                     id = data.id;
                     companyName = data.name;
                     $("#typingAnimation").hide();
-                    $("#output0-5").html(formattedText);
+                    $("#output0-5").html('Here\'s another idea: '+ formattedText);
                     $("#message0-5").css("display", "flex");
-                    $("typingDiv").css("width", "100%");
+                    $("#typingDiv").css("width", "100%");
                     $("#output0-5").show();
                     $("#continueReading2").show();
                     })
@@ -132,7 +133,7 @@
                     });
               }, 6000);  // 6 second delay
             })
-            
+
             .catch(error => {
               clearInterval(loadingInterval); // Stop loading message
               $("#output0").text(errorMessage);
@@ -148,12 +149,10 @@
       // Showing subscribe box
       $('#continueReading2').click(function() {
         $("#continueReading2").hide();
-        $("#output0-5").hide();
         $("#divSubscribe").show();
 
       });
 
-        
       // Subscribing to newsletter -> message1
       $('#subscribe').click(function() {
         i = 1;
