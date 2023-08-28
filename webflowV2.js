@@ -9,8 +9,6 @@
       $("#formOtherNav").val("SU");
       $("#formOtherFooter").val("SU");
 
-      console.log("Hello");
-
 
       // Get URL parametres
       var params = new URLSearchParams(window.location.search);
@@ -50,6 +48,7 @@
         }, 50);  // 50ms delay
       }
     
+      /*
       // STEP 1: Entering domain -> message0
       $('#enter1').on('click', function() {
         i = 0;
@@ -142,6 +141,7 @@
             });
         }, 6000);  // 5 second delay
 
+        */
 
       // STEP 2: Subscribing
 
@@ -224,7 +224,7 @@
             var loadingInterval = startLoadingAnimation("output1", loadingTexts2);
             
             // Pipedream Chosen Previews
-            webhook = 'https://eo9ypifoenuozi1.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[0]) + '&contact=' + encodeURIComponent(contactId);
+            webhook = 'https://eo9ypifoenuozi1.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[2]) + '&contact=' + encodeURIComponent(contactId);
             fetch(webhook)
             .then(response => response.json())
             .then(data => {
@@ -243,6 +243,8 @@
 
             // Prep share link - remove 'rec from rId'
             // ******
+
+            $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99');
 
             // Prep Stripe link
             var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x);
@@ -264,13 +266,13 @@
         }
       }
       $('#growth').click(function() {
-        handlePriorityClick('#growth', ['Growth', 'more users']);
+        handlePriorityClick('#growth', ['Growth', 'more users', 'Growth']);
       });
       $('#monetisation').click(function() {
-        handlePriorityClick('#monetisation', ['Purchasing', 'more money']);
+        handlePriorityClick('#monetisation', ['Monetisation', 'more money', 'Purchasing']);
       });
       $('#habits').click(function() {
-        handlePriorityClick('#habits', ['Habits', 'more user engagement']);
+        handlePriorityClick('#habits', ['Habit', 'more user engagement', 'Habits']);
       });
 
 
