@@ -51,7 +51,7 @@
       }
     
       // STEP 1: Entering domain -> message0
-      $('#enter').click(function() {
+      $('#enter').on('click', function() {
         i = 0;
         x = $("#domain").val().trim();
         $("#message0").css("display", "flex");
