@@ -92,7 +92,7 @@
         }
 
         // Pipedream Domain Idea
-        webhook = 'https://eolx839xrpffo36.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=' + encodeURIComponent(i);
+        webhook = 'https://eouv4h921hkuwbt.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=' + encodeURIComponent(i);
         fetch(webhook)
             .then(response => response.json())
             .then(data => {
@@ -113,7 +113,7 @@
 
         // Show preview message
         setTimeout(() => {
-            $("#message0-5").show();
+            $("#message0-5").css("display", "flex");
         
             // Pipedream First Preview
             webhook = 'https://eo7vbf3v6550my9.m.pipedream.net/?x=' + encodeURIComponent(x);
@@ -204,7 +204,7 @@
         // Load more tips div
         setTimeout(() => {
             $("#helpMessageMore").text('Select your #1 priority for '+ companyName +':');
-            $("#messageMore").show();
+            $("#messageMore").css("display", "flex");
         }, 3000); 
 
       });
@@ -214,7 +214,7 @@
       function handlePriorityClick(selectedID, array) {
         if (!selected) {
             selected = array;
-            $("#message1").show();
+            $("#message1").css("display", "flex");
             $('.button.check').css('border-color', '#E9F0EC');
             $(selectedID).css('background-color', '#E9F0EC');
 
