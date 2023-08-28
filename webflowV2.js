@@ -15,14 +15,17 @@
       // Get URL parametres
       var params = new URLSearchParams(window.location.search);
       var domain = params.get('d'); // "value1"
-      var referrer = 'rec' + params.get('r'); // "value2"
+      var referrer = params.get('r'); // "value2"
+      if (referrer) {
+        referrer = 'rec' + referrer;
+      }
       var webhook;
       console.log(domain);
       console.log(referrer);
       
       // API calls
       
-      var i = 0;
+      let i = 0;
       var loadingIndex = 0;
       var x = "";
       const errorMessage = "Something went wrong, and we\'re on it. Try again and let\'s keep moving.";
