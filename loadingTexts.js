@@ -42,5 +42,6 @@ var ideaTexts = ['Insanely great idea:','Revolutionary idea:','The idea that cha
 var exampleTexts = ['Let\'s pull back the curtain:','Let me show you the magic behind it:','Dive in with me:','This is where it gets insanely great:','Here\'s the essence of our innovation:','Imagine this:'];
 
 var referralTexts = [
-    'Found this website that uses AI to give you half-decent ideas to improve your product - [URL]\n\nWhat do you think of your ideas?',
+    'Found this website that uses AI to give you half-decent ideas to improve your product - [URL]',
+    'Found this website that uses AI to give you solid ideas to improve your product - [URL]'
 ]
