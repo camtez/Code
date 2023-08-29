@@ -168,6 +168,7 @@
 
             .catch(error => {
               clearInterval(loadingInterval); // Stop loading message
+              console.log(error);
               $("#output0").text(errorMessage);
               $("#output0").css('color', '#DE3021');
               $("#enter").text("Try Again");
