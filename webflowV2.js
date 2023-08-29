@@ -145,6 +145,7 @@
               // Show preview message
               setTimeout(() => {
                 $("#message0-5").css("display", "flex");
+                $("#message0").css("opacity", 0.75);
             
                 // Pipedream First Preview
                 webhook = 'https://eo7vbf3v6550my9.m.pipedream.net/?x=' + encodeURIComponent(x);
@@ -176,6 +177,7 @@
               clearInterval(loadingInterval); // Stop loading message
               console.log(error);
               $("#output0").text(errorMessage);
+              $("#progressBar0").hide();
               $("#output0").css('color', '#DE3021');
               $("#enter").text("Try Again");
             });
@@ -238,16 +240,20 @@
             .then(data => {
               clearInterval(loadingInterval);
               let formattedText = data.result.replace(/\n/g, '<br>');
-              console.log(formattedText);
-              const steveText = replaceText(formattedText);
-              console.log(steveText);
+              formattedText = replaceText(formattedText);
               $("#output0-5").html(formattedText);
               $('#progressBar0-5').hide();
               // Load more tips div
               setTimeout(() => {
-                $("#helpMessageMore").text('Select your #1 priority for '+ companyName +':');
                 $("#messageMore").css("display", "flex");
-              }, 5000); 
+                $("#message0-5").css("opacity", 0.75);
+                setTimeout(() => {
+                  $("#helpMessageMore").text('Select your #1 priority for '+ companyName +':');
+                  $("#optionsDiv").css("display", "flex");
+                  $("#typingAnimation2").hide();
+                  $("#typingDiv2").css("width", "100%");
+                }, 2000); 
+              }, 3000); 
             })
             .catch(error => {
               clearInterval(loadingInterval);
@@ -262,6 +268,7 @@
         if (!selected) {
             selected = array;
             $("#message1").css("display", "flex");
+            $("#messageMore").css("opacity", 0.75);
             $('.button.check').css('border-color', '#E9F0EC');
             $(selectedID).css('background-color', '#E9F0EC');
 
@@ -291,7 +298,8 @@
             // Prep share link
             const referId = contactId.split(/rec/)[1];
             const referLink = 'conversionexamples.com/ai?r='+referId;
-            const randomShareText = referralTexts[Math.floor(Math.random() * referralTexts.length)].replace(/[URL]/g, referLink)
+            console.log(referLink);
+            const randomShareText = referralTexts[Math.floor(Math.random() * referralTexts.length)].replace(/\[URL\]/g, referLink)
             $('#referMsg').val(randomShareText);
 
             $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99');
@@ -341,10 +349,12 @@
       
       // Sharing -> Message2
       function commonShare() {
-        copyToClipboard("Check this out: conversionexamples.com/ai") // Save to clipboard
+        copyToClipboard("Check this out: conversionexamples.com/ai"); // Save to clipboard
+        $('#share1').css('background-color', '#F2ECD2');
+        $('#share1').text('Copied!');
       }
 
-      $('#share1').click(commonShare())
+      $('#share1').click(commonShare()); // Copy to clipboard
       $('#share2').click(function() { // Linkedin
         commonShare();
         const linkedinURL = 'https://www.linkedin.com/feed/?shareActive&mini=true&text=' + encodeURIComponent('Insanely great, as Steve would say. Check this out if you make products: conversionexamples.com/ai');
@@ -355,7 +365,7 @@
         const twitterURL = 'http://twitter.com/share?url=' + encodeURIComponent('Can AI think different? Try for yourself: conversionexamples.com/ai');
         window.open(twitterURL, '_blank');
       });
-      $('#share4').click(commonShare()) // Copy to clipboard
+      $('#share4').click(commonShare());
 
     });
     
