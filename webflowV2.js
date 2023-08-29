@@ -85,8 +85,8 @@
       $('#enter').click(function() {
         console.log('clicked');
         i = 0;
-        //x = DOMPurify.sanitize($("#domain").val().trim());
-        x = $("#domain").val().trim();
+        x = DOMPurify.sanitize($("#domain").val().trim());
+        //x = $("#domain").val().trim();
         
         console.log(x);
         $("#message0").css("display", "flex");
@@ -200,8 +200,8 @@
       // Subscribing to newsletter -> message1
       $('#subscribe').click(function() {
         i = 1;
-        //var email = DOMPurify.sanitize($("#email").val().trim());
-        var email = $("#email").val().trim();
+        var email = DOMPurify.sanitize($("#email").val().trim());
+        //var email = $("#email").val().trim();
         
         // Check if email is ok
         if (email === '' || !email.includes('@') || !email.includes('.')) {
