@@ -48,6 +48,36 @@
             $(fillerBar).css("width", "100%");
         }, 50);  // 50ms delay
       }
+
+      function getRandomIdeaText() {
+        var randomExpression = ideaTexts[Math.floor(Math.random() * ideaTexts.length)];
+        while (randomExpression === lastIdeaText) {
+            randomExpression = ideaTexts[Math.floor(Math.random() * ideaTexts.length)];
+        }
+        lastIdeaText = randomExpression;
+        console.log(randomExpression);
+        return randomExpression;
+      }
+
+      function getRandomExampleText() {
+        var randomExpression = exampleTexts[Math.floor(Math.random() * exampleTexts.length)];
+        while (randomExpression === lastExampleText) {
+            randomExpression = exampleTexts[Math.floor(Math.random() * exampleTexts.length)];
+        }
+        lastExampleText = randomExpression;
+        console.log(randomExpression);
+        return randomExpression;
+      }
+
+      function replaceText(apiMessage) {
+        let tempMessage = apiMessage;
+        
+        tempMessage = tempMessage.split(/\n\n\n/).map(idea => idea.replace(/Feature idea:|Feature idea name:/g,getRandomIdeaText())).join('\n\n\n');
+        tempMessage = tempMessage.split(/\n\n\n/).map(idea => idea.replace(/Example:|Example \(including how it works\):/gi,getRandomExampleText())).join('\n\n\n');
+        tempMessage = tempMessage.replace(/\n/g, '<br>');
+        return tempMessage;
+      }
+
     
       // STEP 1: Entering domain -> message0
       $('#enter').click(function() {
@@ -99,6 +129,7 @@
             .then(data => {
               clearInterval(loadingInterval); // Stop loading message
               let formattedText = data.result.replace(/\n/g, '<br>');
+              formattedText = replaceText(formattedText);
               $("#output0").html(formattedText);
               $("#progressBar0").hide();
               $("#continueReading").show();
@@ -198,14 +229,17 @@
             .then(response => response.json())
             .then(data => {
               clearInterval(loadingInterval);
-              let formattedText = data.result;
+              let formattedText = data.result.replace(/\n/g, '<br>');
+              console.log(formattedText);
+              const steveText = replaceText(formattedText);
+              console.log(steveText);
               $("#output0-5").html(formattedText);
               $('#progressBar0-5').hide();
               // Load more tips div
               setTimeout(() => {
                 $("#helpMessageMore").text('Select your #1 priority for '+ companyName +':');
                 $("#messageMore").css("display", "flex");
-              }, 3000); 
+              }, 5000); 
             })
             .catch(error => {
               clearInterval(loadingInterval);
@@ -232,22 +266,23 @@
             .then(response => response.json())
             .then(data => {
               clearInterval(loadingInterval);
-              let formattedText = data.result;
-              $("#output0-5").html(formattedText);
-              $("#continueReading2").show();
-              $("#message0-5").css("display", "flex");
+              console.log('more ideas response received')
+              $('#loadingMoreDiv').hide();
+              let formattedText = data.result.replace(/\n/g, '<br>');
+              $("#finalIdeas").html(formattedText);
+              $("#finalIdeasDiv").css("display", "flex");
             })
             .catch(error => {
               clearInterval(loadingInterval);
-              $("#output0-5").hide();
-              $("#continueReading2").text("Click here to get another tip");
-              $("#message0-5").css("display", "flex");
+              $("#output1").html(errorMessage);
             });
 
             // Prep share link - remove 'rec from rId'
             // ******
 
             $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99');
+
+            console.log('share setup complete');
 
             // Prep Stripe link
             var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x);
@@ -263,6 +298,8 @@
                 $(outputElement).css('color', '#DE3021');
                 console.log('error');
                 });
+
+            console.log('stripe link received');
 
         }
       }
