@@ -85,7 +85,8 @@
       $('#enter').click(function() {
         console.log('clicked');
         i = 0;
-        x = $("#domain").val().trim();
+        x = DOMPurify.sanitize($("#domain").val().trim());
+        
         console.log(x);
         $("#message0").css("display", "flex");
         $("#divAnimate").css("max-height", "3000px");
@@ -198,7 +199,7 @@
       // Subscribing to newsletter -> message1
       $('#subscribe').click(function() {
         i = 1;
-        var email = $("#email").val().trim();
+        var email = DOMPurify.sanitize($("#email").val().trim());
         
         // Check if email is ok
         if (email === '' || !email.includes('@') || !email.includes('.')) {
@@ -273,6 +274,9 @@
               clearInterval(loadingInterval);
               console.log('more ideas response received')
               $('#loadingMoreDiv').hide();
+              $('#30ideaIntro').text('I\'ve got 30 ideas to get ' + companyName + ' ' + selected[1] + ':');
+              $('#getMoreDescription').text('Get 30 ' + selected[0] + ' Ideas (including these 3) right now for $99.');
+              $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99.');
               let formattedText = data.result.replace(/\n/g, '<br>');
               $("#finalIdeas").html(formattedText);
               $("#finalIdeasDiv").css("display", "flex");
@@ -282,8 +286,11 @@
               $("#output1").html(errorMessage);
             });
 
-            // Prep share link - remove 'rec from rId'
-            // ******
+            // Prep share link
+            const referId = contactId.split(/rec/)[1];
+            const referLink = 'conversionexamples.com/ai?r='+referId;
+            const randomShareText = referralTexts[Math.floor(Math.random() * referralTexts.length)].replace(/[URL]/g, referLink)
+            $('#referMsg').val(randomShareText);
 
             $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99');
 
