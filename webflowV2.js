@@ -86,6 +86,7 @@
         x = $("#domain").val().trim();
         console.log(x);
         $("#message0").css("display", "flex");
+        $("#divAnimate").css("max-height", "3000px");
         startLoadingBar('#progressBar0','#filler0');
 
         // Style input bar
