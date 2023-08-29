@@ -31,6 +31,8 @@
       let companyName = "";
       let contactId = "";
       let loadingInterval;
+      let lastIdeaText = "";
+      let lastExampleText = "";
 
 
       // Reusable functions
