@@ -295,8 +295,6 @@
             const randomShareText = referralTexts[Math.floor(Math.random() * referralTexts.length)].replace(/\[URL\]/g, referLink)
             $('#referMsg').val(randomShareText);
 
-            $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99');
-
             // Prep Stripe link
             var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x) + '&priority=' + encodeURIComponent(selected[2]);
             fetch(webhook)
@@ -321,7 +319,7 @@
         handlePriorityClick('#monetisation', ['Monetisation', 'more money', 'Purchasing']);
       });
       $('#habits').click(function() {
-        handlePriorityClick('#habits', ['Habit', 'more user engagement', 'Habits']);
+        handlePriorityClick('#habits', ['Habit-Building', 'more user engagement', 'Habits']);
       });
 
 
@@ -336,19 +334,19 @@
             el.select();
             try {
                 document.execCommand('copy');
-                alert('Copied using execCommand!');
+                console.log('Copied successfully!');
             } catch (err) {
-                alert('Failed to copy text.');
+                alert('Hit a snag copying that text. You\'ll have to copy it manually.');
             }
             document.body.removeChild(el);
         } else {
             navigator.clipboard.writeText(text_to_copy).then(
                 function() {
-                    alert("Copied successfully!"); // success 
+                    console.log("Copied successfully!"); // success 
                 }
             ).catch(
                 function(err) {
-                    alert("Failed to copy: " + err); // error
+                    alert('Hit a snag copying that text. You\'ll have to copy it manually.'); // error
                 }
             );
         }
