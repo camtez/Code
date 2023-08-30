@@ -26,7 +26,7 @@
       let i = 0;
       var loadingIndex = 0;
       var x = "";
-      const errorMessage = "Something went wrong, and we\'re on it. Try again and let\'s keep moving.";
+      const errorMessage = "There's been a hiccup. Let's make it work this time.";
       let id = "";
       let companyName = "";
       let contactId = "";
@@ -86,12 +86,12 @@
         console.log('clicked');
         i = 0;
         x = DOMPurify.sanitize($("#domain").val().trim());
-        //x = $("#domain").val().trim();
         
         console.log(x);
         $("#message0").css("display", "flex");
         $("#divAnimate").css("max-height", "3000px");
         $("#divAnimate").css("opacity", 1);
+        $("#spacer300").show();
         startLoadingBar('#progressBar0','#filler0');
 
         // Style input bar
@@ -176,7 +176,7 @@
             .catch(error => {
               clearInterval(loadingInterval); // Stop loading message
               console.log(error);
-              $("#output0").text(errorMessage);
+              $("#output0").text('I can\'t quite get your website to work right. Help me out here.');
               $("#progressBar0").hide();
               $("#output0").css('color', '#DE3021');
               $("#enter").text("Try Again");
@@ -203,7 +203,6 @@
       $('#subscribe').click(function() {
         i = 1;
         var email = DOMPurify.sanitize($("#email").val().trim());
-        //var email = $("#email").val().trim();
         
         // Check if email is ok
         if (email === '' || !email.includes('@') || !email.includes('.')) {
@@ -225,12 +224,13 @@
         }, 1500);
 
         // Make automation to signup email
-        var makehook = 'https://hook.us1.make.com/pl17c96gsqf34sgimjjj1e7w6vqpmjnl/?email=' + encodeURIComponent(email) + '&x=' + encodeURIComponent(x) + '&other=' + encodeURIComponent('AI');
+        var makehook = 'https://hook.us1.make.com/pl17c96gsqf34sgimjjj1e7w6vqpmjnl/?email=' + encodeURIComponent(email) + '&x=' + encodeURIComponent(x) + '&other=' + encodeURIComponent('AI') + '&r=' + encodeURIComponent(referrer);
         console.log(makehook);  
         fetch(makehook)
             .then(response => response.json())
             .then(data => {
               contactId = data.contactID;
+              console.log('contactID '+ contactId);
             });
 
         // Pipedream Signup Idea 
@@ -307,7 +307,7 @@
             console.log('share setup complete');
 
             // Prep Stripe link
-            var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x);
+            var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x) + '&priority=' + encodeURIComponent(selected[2]);
             fetch(webhook)
                 .then(response => response.json())
                 .then(data => {
@@ -349,7 +349,7 @@
       
       // Sharing -> Message2
       function commonShare() {
-        copyToClipboard("Check this out: conversionexamples.com/ai"); // Save to clipboard
+        copyToClipboard($('#referMsg').val()); // Save to clipboard
         $('#share1').css('background-color', '#F2ECD2');
         $('#share1').text('Copied!');
       }
@@ -357,12 +357,12 @@
       $('#share1').click(commonShare()); // Copy to clipboard
       $('#share2').click(function() { // Linkedin
         commonShare();
-        const linkedinURL = 'https://www.linkedin.com/feed/?shareActive&mini=true&text=' + encodeURIComponent('Insanely great, as Steve would say. Check this out if you make products: conversionexamples.com/ai');
+        const linkedinURL = 'https://www.linkedin.com/feed/?shareActive&mini=true&text=' + encodeURIComponent($('#referMsg').val());
         window.open(linkedinURL, '_blank');
       });
       $('#share3').click(function() { // Twitter
         commonShare();
-        const twitterURL = 'http://twitter.com/share?url=' + encodeURIComponent('Can AI think different? Try for yourself: conversionexamples.com/ai');
+        const twitterURL = 'http://twitter.com/share?url=' + encodeURIComponent($('#referMsg').val());
         window.open(twitterURL, '_blank');
       });
       $('#share4').click(commonShare());
