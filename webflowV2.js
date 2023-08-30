@@ -339,14 +339,32 @@
 
       // SHARING
 
-      function copyToClipboard(text) {
-        var sampleTextarea = document.createElement("textarea");
-        document.body.appendChild(sampleTextarea);
-        sampleTextarea.value = text; //save main text in it
-        sampleTextarea.select(); //select textarea contenrs
-        document.execCommand("copy");
-        document.body.removeChild(sampleTextarea);
-      }
+      function copyToClipboard(text_to_copy) {
+        if (!navigator.clipboard) {
+            // fallback for older browsers
+            const el = document.createElement('textarea');
+            el.value = text_to_copy;
+            document.body.appendChild(el);
+            el.select();
+            try {
+                document.execCommand('copy');
+                alert('Copied using execCommand!');
+            } catch (err) {
+                alert('Failed to copy text.');
+            }
+            document.body.removeChild(el);
+        } else {
+            navigator.clipboard.writeText(text_to_copy).then(
+                function() {
+                    alert("Copied successfully!"); // success 
+                }
+            ).catch(
+                function(err) {
+                    alert("Failed to copy: " + err); // error
+                }
+            );
+        }
+    }
       
       // Sharing -> Message2
       function commonShare() {
@@ -355,7 +373,7 @@
         $('#share1').text('Copied!');
       }
 
-      $('#share1').click(commonShare()); // Copy to clipboard
+      $('#share1').click(commonShare); // Copy to clipboard
       $('#share2').click(function() { // Linkedin
         commonShare();
         const linkedinURL = 'https://www.linkedin.com/feed/?shareActive&mini=true&text=' + encodeURIComponent($('#referMsg').val());
@@ -366,7 +384,7 @@
         const twitterURL = 'http://twitter.com/share?url=' + encodeURIComponent($('#referMsg').val());
         window.open(twitterURL, '_blank');
       });
-      $('#share4').click(commonShare());
+      $('#share4').click(commonShare);
 
     });
     
