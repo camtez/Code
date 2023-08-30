@@ -18,8 +18,6 @@
         referrer = 'rec' + referrer;
       }
       var webhook;
-      console.log(domain);
-      console.log(referrer);
       
       // API calls
       
@@ -57,7 +55,6 @@
             randomExpression = ideaTexts[Math.floor(Math.random() * ideaTexts.length)];
         }
         lastIdeaText = randomExpression;
-        console.log(randomExpression);
         return randomExpression;
       }
 
@@ -67,7 +64,6 @@
             randomExpression = exampleTexts[Math.floor(Math.random() * exampleTexts.length)];
         }
         lastExampleText = randomExpression;
-        console.log(randomExpression);
         return randomExpression;
       }
 
@@ -103,7 +99,7 @@
         if (x === '') {
             $("#output0").text('Please enter a domain');
             $("#output0").css('color', '#DE3021');
-            console.log('x is empty')
+            console.log('URL is empty')
             return; // Exit the function early
         }
     
@@ -226,12 +222,10 @@
 
         // Make automation to signup email
         var makehook = 'https://hook.us1.make.com/pl17c96gsqf34sgimjjj1e7w6vqpmjnl/?email=' + encodeURIComponent(email) + '&x=' + encodeURIComponent(x) + '&other=' + encodeURIComponent('AI') + '&r=' + encodeURIComponent(referrer);
-        console.log(makehook);  
         fetch(makehook)
             .then(response => response.json())
             .then(data => {
               contactId = data.contactID;
-              console.log('contactID '+ contactId);
             });
 
         // Pipedream Signup Idea 
@@ -282,7 +276,6 @@
             .then(response => response.json())
             .then(data => {
               clearInterval(loadingInterval);
-              console.log('more ideas response received')
               $('#loadingMoreDiv').hide();
               $('#30ideaIntro').text('I\'ve got 30 ideas to get ' + companyName + ' ' + selected[1] + ':');
               $('#getMoreDescription').text('Get 30 ' + selected[0] + ' Ideas (including these 3) right now for $99.');
@@ -299,13 +292,10 @@
             // Prep share link
             const referId = contactId.split(/rec/)[1];
             const referLink = 'conversionexamples.com/ai?r='+referId;
-            console.log(referLink);
             const randomShareText = referralTexts[Math.floor(Math.random() * referralTexts.length)].replace(/\[URL\]/g, referLink)
             $('#referMsg').val(randomShareText);
 
             $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99');
-
-            console.log('share setup complete');
 
             // Prep Stripe link
             var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x) + '&priority=' + encodeURIComponent(selected[2]);
@@ -319,10 +309,8 @@
                 clearInterval(loadingInterval);
                 $(outputElement).text('Error: ' + error.toString());
                 $(outputElement).css('color', '#DE3021');
-                console.log('error');
+                console.log(error);
                 });
-
-            console.log('stripe link received');
 
         }
       }
