@@ -140,7 +140,7 @@
               $("#progressBar0").hide();
               $("#continueReading").show();
               $("#question1").css("display", "flex");
-              $("#enter").css("opacity", 1);
+              $("#enter").css("opacity", 0);
               
               // Show preview message
               setTimeout(() => {
