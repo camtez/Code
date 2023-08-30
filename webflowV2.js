@@ -140,7 +140,7 @@
               $("#progressBar0").hide();
               $("#continueReading").show();
               $("#question1").css("display", "flex");
-              $("#enter").hide();
+              $("#enter").css("opacity", 1);
               
               // Show preview message
               setTimeout(() => {
@@ -220,7 +220,8 @@
         startLoadingBar('#progressBar0-5','#filler0-5');
 
         setTimeout(() => {
-            loadingInterval = startLoadingAnimation("output0-5", loadingTexts1); // Loading text starts after 1.5 seconds
+          $("#output0-5").text('Thinking different...');
+          loadingInterval = startLoadingAnimation("output0-5", loadingTexts1); // Loading text starts after 1.5 seconds
         }, 1500);
 
         // Make automation to signup email
@@ -246,7 +247,6 @@
               // Load more tips div
               setTimeout(() => {
                 $("#messageMore").css("display", "flex");
-                $("#message0-5").css("opacity", 0.75);
                 setTimeout(() => {
                   $("#helpMessageMore").text('Select your #1 priority for '+ companyName +':');
                   $("#optionsDiv").css("display", "flex");
@@ -269,6 +269,7 @@
             selected = array;
             $("#message1").css("display", "flex");
             $("#messageMore").css("opacity", 0.75);
+            $("#message0-5").css("opacity", 0.75);
             $('.button.check').css('border-color', '#E9F0EC');
             $(selectedID).css('background-color', '#E9F0EC');
 
