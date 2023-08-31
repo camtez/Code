@@ -137,6 +137,9 @@
               $("#continueReading").show();
               $("#question1").css("display", "flex");
               $("#enter").css("opacity", 0);
+              setTimeout(() => {
+                $("#enter").hide();
+              }, 500);  // 50ms delay
               
               // Show preview message
               setTimeout(() => {
@@ -166,7 +169,7 @@
                     $("#output0-5").show();
                     $("#continueReading2").show();
                     });
-              }, 6000);  // 6 second delay
+              }, 4500);  // 4.5 second delay
             })
 
             .catch(error => {
