@@ -13,6 +13,7 @@
       // Get URL parametres
       var params = new URLSearchParams(window.location.search);
       var domain = params.get('d'); // "value1"
+      console.log(domain);
       var referrer = params.get('r'); // "value2"
       if (referrer) {
         referrer = 'rec' + referrer;
@@ -203,6 +204,7 @@
         x = domain;
         $("#domain").val(x);
         $("#enter").hide();
+        console.log('triggered');
         enterDomain();
       }
 
