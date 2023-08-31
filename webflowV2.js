@@ -232,8 +232,7 @@
 
       });
 
-      // Subscribing to newsletter -> message1
-      $('#subscribe').click(function() {
+      function subscribeToNewsletter() {
         i = 1;
         var email = DOMPurify.sanitize($("#email").val().trim());
         
@@ -291,7 +290,16 @@
               clearInterval(loadingInterval);
               $("#output0-5").html(errorMessage);
             });
+      }
 
+      // Subscribing to newsletter -> message1
+      $('#subscribe').click(function() {
+        subscribeToNewsletter();
+      });
+      $('#email').keydown(function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+          subscribeToNewsletter();
+        }
       });
 
       // Checkbox buttons
