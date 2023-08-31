@@ -78,8 +78,18 @@
 
     
       // STEP 1: Entering domain -> message0
-      $('#enter').click(function() {
+
+      let isFunctionRunning = false;
+
+      function enterDomain() {
+
         console.log('clicked');
+        if (isFunctionRunning) {
+          console.log("Function is already running.");
+          return;
+        }
+        isFunctionRunning = true;
+
         i = 0;
         x = DOMPurify.sanitize($("#domain").val().trim());
         
@@ -159,7 +169,9 @@
                     $("#message0-5").css("display", "flex");
                     $("#typingDiv").css("width", "100%");
                     $("#output0-5").show();
+                    $("#newsletterTextDiv").show();
                     $("#continueReading2").show();
+                    isFunctionRunning = false;
                     })
                     .catch(error => {
                     $("#typingAnimation").hide();
@@ -168,6 +180,7 @@
                     $("#message0-5").css("display", "flex");
                     $("#output0-5").show();
                     $("#continueReading2").show();
+                    isFunctionRunning = false;
                     });
               }, 4500);  // 4.5 second delay
             })
@@ -179,9 +192,23 @@
               $("#progressBar0").hide();
               $("#output0").css('color', '#DE3021');
               $("#enter").text("Try Again");
+              isFunctionRunning = false;
             });
 
-          });
+
+      }
+
+
+      $('#enter').click(function() {
+        enterDomain();
+      });
+
+      $('#domain').keydown(function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+          enterDomain();
+        }
+      });
+
 
       // Continue reading first message
       $('#continueReading').click(function() {
@@ -212,6 +239,7 @@
 
         // If successful
         $('#divSubscribe').hide();
+        $("#newsletterTextDiv").hide();
         $("#newsletterText").css('color', 'black');
         $("#output0-5").text('Successfully signed up to the newsletter!');
         $("#output0-5").show();
@@ -280,9 +308,9 @@
             .then(data => {
               clearInterval(loadingInterval);
               $('#loadingMoreDiv').hide();
-              $('#30ideaIntro').text('I\'ve got 30 ideas to get ' + companyName + ' ' + selected[1] + ':');
-              $('#getMoreDescription').text('Get 30 ' + selected[0] + ' Ideas (including these 3) right now for $99.');
-              $('#getmore').text('Get 30 ' + selected[0] + ' Ideas for $99.');
+              $('#30ideaIntro').text('I\'ve got 30 ideas that will get ' + companyName + ' ' + selected[1] + ':');
+              $('#getMoreDescription').text('Get all 30 ideas (+ the steps to implement each idea). For just $99.');
+              $('#getmore').text('Get your roadmap to ' + selected[1] + ' right now for $99');
               let formattedText = data.result.replace(/\n/g, '<br>');
               $("#finalIdeas").html(formattedText);
               $("#finalIdeasDiv").css("display", "flex");
@@ -325,6 +353,17 @@
         handlePriorityClick('#habits', ['Habit-Building', 'more user engagement', 'Habits']);
       });
 
+      $('#continueReading3').click(function() {
+        $("#finalIdeasDiv2").css("display", "flex");
+        $('#continueReading3').hide();
+      });
+      $('#continueReading4').click(function() {
+        $("#finalIdeasDiv3").css("display", "flex");
+        $('#continueReading4').hide();
+      });
+
+
+      
 
       // SHARING
 
