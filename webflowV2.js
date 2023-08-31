@@ -199,6 +199,13 @@
       }
 
 
+      if (domain) { 
+        x = domain;
+        $("#domain").val(x);
+        $("#enter").hide();
+        enterDomain();
+      }
+
       $('#enter').click(function() {
         enterDomain();
       });
