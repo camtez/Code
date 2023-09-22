@@ -18,10 +18,18 @@
       if (referrer) {
         referrer = 'rec' + referrer;
       }
-      var webhook;
+      var custom = params.get('c');
+      if (custom) {
+        custom = 'rec' + custom;
+      }
+      var exampleId = params.get('e');
+      if (exampleId) {
+        exampleId = 'rec' + exampleId;
+      }
       
       // API calls
       
+      var webhook;
       let i = 0;
       var loadingIndex = 0;
       var x = "";
@@ -136,7 +144,7 @@
         }
 
         // Pipedream Domain Idea
-        webhook = 'https://eouv4h921hkuwbt.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=' + encodeURIComponent(i);
+        webhook = 'https://eouv4h921hkuwbt.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=' + encodeURIComponent(i) + '&e=' + encodeURIComponent(e);
         fetch(webhook)
             .then(response => response.json())
             .then(data => {
