@@ -115,7 +115,7 @@
         $("#domain").css("border-color", "#E9F0EC");
 
         // Check if x is not empty
-        if (x === '' || !e.includes('.')) {
+        if (x === '' || !x.includes('.')) {
             $("#output0").text('Please enter a valid domain');
             $("#output0").css('color', '#DE3021');
             console.log('URL is empty')
