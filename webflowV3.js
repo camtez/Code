@@ -66,20 +66,10 @@
         return randomExpression;
       }
 
-      function getRandomExampleText() {
-        var randomExpression = exampleTexts[Math.floor(Math.random() * exampleTexts.length)];
-        while (randomExpression === lastExampleText) {
-            randomExpression = exampleTexts[Math.floor(Math.random() * exampleTexts.length)];
-        }
-        lastExampleText = randomExpression;
-        return randomExpression;
-      }
-
       function replaceText(apiMessage) {
         let tempMessage = apiMessage;
         
         tempMessage = tempMessage.split(/\n\n\n/).map(idea => idea.replace(/Feature idea:|Feature idea name:/g,getRandomIdeaText())).join('\n\n\n');
-        tempMessage = tempMessage.split(/\n\n\n/).map(idea => idea.replace(/Example:|Example \(including how it works\):/gi,getRandomExampleText())).join('\n\n\n');
         tempMessage = tempMessage.replace(/\n/g, '<br>');
         return tempMessage;
       }
@@ -111,7 +101,7 @@
         $("#subtitle2").hide(); // hides error message
 
         // Re-style input bar
-        $("#enter").text("Loading...");
+        $("#enter").text("✅");
         $("#enter").css("background-color", "#E9F0EC");
         $("#domain").css("border-color", "#E9F0EC");
 
@@ -175,13 +165,11 @@
         fetch(webhook)
             .then(response => response.json())
             .then(data => {
-              // *** data should return in an object or first, how
-
               console.log(data);
-
               clearInterval(loadingInterval); // Stop loading message
-              let firstText = data.result.replace(/\n/g, '<br>');
-              let secondText = data.result.replace(/\n/g, '<br>');
+              let firstText = data.partOne.replace(/\n/g, '<br>');
+              let secondText = data.partTwo.replace(/\n/g, '<br>');
+              companyName = data.company;
               formattedText = replaceText(formattedText);
               $("#output0").html(formattedText);
               $("#progressBar0").hide();
@@ -197,6 +185,7 @@
                 setTimeout(() => { // Show how it works
                   $("#messageDiv0-5").show();
                   $("#output0How").html(secondText);
+                  $("#continueReading2").show();
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
                     setTimeout(() => { // Show question which

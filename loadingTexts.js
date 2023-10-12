@@ -1,4 +1,5 @@
 var loadingTexts0 = [
+            'Designing your next best move.', 'Designing your next best move..', 'Designing your next best move...',
             'Bear with us, magic takes a moment.', 'Bear with us, magic takes a moment..', 'Bear with us, magic takes a moment...',    
             'Diving into your website.', 'Diving into your website..', 'Diving into your website...',
             'Walking through your digital universe.', 'Walking through your digital universe..', 'Walking through your digital universe...',
@@ -40,7 +41,7 @@ var otherLoadingTexts = [
 
 var sharingTexts = ['We\'ll give you a little bit to finish sharing it.', 'We\'ll give you a little bit to finish sharing it..', 'We\'ll give you a little bit to finish sharing it...'];
 
-var ideaTexts = ['Insanely great idea:','Revolutionary idea:','The idea that changes everything:','The next game-changing idea:','Breakthrough idea:'];
+var ideaTexts = ['Insanely great idea for you:','Revolutionary idea for you:','The idea that changes everything:','Your next game-changing idea:','Your breakthrough idea:'];
 
 var exampleTexts = ['Let\'s pull back the curtain:','Let me show you the magic behind it:','Dive in with me:','This is where it gets insanely great:','Here\'s the essence of our innovation:','Imagine this:'];
 
