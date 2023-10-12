@@ -264,7 +264,7 @@
         // Pipedream 3 Previews
 
         // *** change webhook and divs affected
-        webhook = 'https://eo9ypifoenuozi1.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[2]) + '&contact=' + encodeURIComponent(contactId);
+        webhook = 'https://eo2vwqqmaeev0sz.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[2]);
         fetch(webhook)
         .then(response => response.json())
         .then(data => {
@@ -287,17 +287,17 @@
         // Prep Stripe link
         var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x) + '&priority=' + encodeURIComponent(selected[2]);
         fetch(webhook)
-            .then(response => response.json())
-            .then(data => {
-            let url = data.result;
-            $("#getPaid").attr("href", url); // set #getPaid link to returned value *** ALSO NEED TO SET THE DEFAULT
-            })
-            .catch(error => {
-            clearInterval(loadingInterval);
-            $(outputElement).text('Error: ' + error.toString());
-            $(outputElement).css('color', '#DE3021');
-            console.log(error);
-            });
+          .then(response => response.json())
+          .then(data => {
+          let url = data.result;
+          $("#getPaid").attr("href", url); // set #getPaid link to returned value *** ALSO NEED TO SET THE DEFAULT
+          })
+          .catch(error => {
+          clearInterval(loadingInterval);
+          $(outputElement).text('Error: ' + error.toString());
+          $(outputElement).css('color', '#DE3021');
+          console.log(error);
+          });
 
       }
 
@@ -341,7 +341,7 @@
               contactId = data.contactID;
             });
 
-        // *** redirect to success page
+        // *** redirect to success page + save contactID somehow??
         
       }
 
