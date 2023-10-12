@@ -252,7 +252,6 @@
             
         // Pipedream 3 Previews
 
-        // *** change webhook and divs affected
         webhook = 'https://eo2vwqqmaeev0sz.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[2]);
         fetch(webhook)
         .then(response => response.json())
@@ -279,7 +278,7 @@
           .then(response => response.json())
           .then(data => {
           let url = data.result;
-          $("#getPaid").attr("href", url); // set #getPaid link to returned value *** ALSO NEED TO SET THE DEFAULT
+          $("#getPaid").attr("href", url); // set #getPaid link to returned value
           })
           .catch(error => {
           clearInterval(loadingInterval);
@@ -292,10 +291,23 @@
 
       // Click get later
       $('#getLater').click(function() {
+        $("#signupIntro").text('Keep making ' + companyName + ' greater');
+        $("#signupDescription").text('Get a reminder in your email + a couple little bonuses');
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
       });
+
+      // Click get later after 3 previews
+
+      $('#getFree').click(function() {
+        $("#signupIntro").text('Make ' + companyName + ' greater, with less guesswork');
+        $("#signupDescription").text('Get a free weekly AI-personalised recommendation to make ' + companyName + ' easier to use, more shareable & stickier.');
+        $("#questionWhich").css("opacity", 0.75);
+        $('#getLater').css('border-color', '#E9F0EC');
+        $('#signupDiv').css("display", "flex");
+      });
+
 
       // Click get now
       $('#getNow').click(function() {
