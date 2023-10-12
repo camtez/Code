@@ -9,7 +9,6 @@
       $("#formOtherNav").val("SU");
       $("#formOtherFooter").val("SU");
 
-
       // Get URL parametres
       var params = new URLSearchParams(window.location.search);
       var domain = params.get('d'); // "value1"
