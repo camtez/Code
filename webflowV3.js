@@ -170,7 +170,7 @@
               let firstText = data.partOne.replace(/\n/g, '<br>');
               let secondText = data.partTwo.replace(/\n/g, '<br>');
               companyName = data.company;
-              formattedText = replaceText(formattedText);
+              formattedText = replaceText(firstText);
               $("#output0").html(formattedText);
               $("#progressBar0").hide();
               $("#continueReading").show();
