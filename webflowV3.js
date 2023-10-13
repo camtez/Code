@@ -183,6 +183,7 @@
               setTimeout(() => { // Show typing
                 $("#message0-5").css("display", "flex");
                 setTimeout(() => { // Show how it works
+                  $("#typingAnimation").hide();
                   $("#messageDiv0-5").show();
                   $("#output0How").html(secondText);
                   $("#continueReading2").show();
@@ -193,10 +194,11 @@
                       $("#whichDiv").css("display", "flex");
                       $("#output0How").html(secondText);
                     }, 3500); 
-                }, 4000);
+                  }, 4000);
+                }, 5000);
               }, 3000);
             })
-          .catch(error => {
+            .catch(error => {
               clearInterval(loadingInterval); // Stop loading message
               console.log(error);
               $("#output0").text('I can\'t quite get your website to work right. Help me out here.');
@@ -205,7 +207,6 @@
               $("#enter").text("Try Again");
               success = -1;
             });
-        });
       }
       
       // Priority buttons
