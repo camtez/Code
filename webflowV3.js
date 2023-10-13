@@ -340,10 +340,9 @@
             .then(response => response.json())
             .then(data => {
               contactId = data.contactID;
-            });
-
-        // *** redirect to success page + save contactID somehow??
-        
+              // Redirect to success page
+              window.location.href = 'https://www.conversionexamples.com/one-more-thing';
+            });     
       }
 
       // Click subscribe button
