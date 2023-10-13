@@ -260,8 +260,7 @@
           clearInterval(loadingInterval);
           $('#loadingMoreDiv').hide();
           $('#30ideaIntro').text('Ok, here are a few more ' + selected[3] + ' hacks you really should try:');
-          $('#getMoreDescription').text('Get all 30 ideas (+ the steps to implement each idea). For just $99.');
-          $('#getmore').text('Get these 3 ' + selected[3] + 'recommendations for ' + companyName);
+          $('#getMoreDescription').text('Get these 3 ' + selected[3] + 'recommendations for ' + companyName);
           let formattedText = data.result.replace(/\n/g, '<br>');
           $("#finalIdeas").html(formattedText);
           $("#finalIdeasDiv").css("display", "flex");
