@@ -81,6 +81,7 @@
 
         i = 0;
         x = DOMPurify.sanitize($("#domain").val().trim());
+        x = x.replace(/\s/g, ""); // remove spaces
 
         // Check if x is not empty
         if (x === '' || !x.includes('.')) {
@@ -228,7 +229,6 @@
 
       // Continue reading second message
       $('#continueReading2').click(function() {
-        // *** Change the text
         $('#continueReading2').hide();
         $("#output0How").css("max-height", "none");
       });
