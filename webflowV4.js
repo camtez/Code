@@ -211,15 +211,19 @@
       }
       
       // Priority buttons
-      $('#growth').click(function() {
+      $('#lowPMF').click(function() {
         getFirstIdea('#growth', ['Growth', 'more users', 'Growth', 'growth']);
       });
-      $('#monetisation').click(function() {
+      $('#prePMF').click(function() {
         getFirstIdea('#monetisation', ['Monetisation', 'more money', 'Purchasing', 'monetisation']);
       });
-      $('#habits').click(function() {
+      $('#postPMF').click(function() {
         getFirstIdea('#habits', ['Habit-Building', 'more user engagement', 'Habits', 'engagement']);
       });
+      $('#scaleUP').click(function() {
+        getFirstIdea('#habits', ['Habit-Building', 'more user engagement', 'Habits', 'engagement']);
+      });
+
 
       // Continue reading first message
       $('#continueReading').click(function() {
