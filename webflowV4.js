@@ -165,7 +165,7 @@
         loadingInterval = startLoadingAnimation("output0",loadingTexts0); // loading text
 
         // Pipedream First Idea
-        webhook = 'https://eockgzovo96ozny.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=' + encodeURIComponent(i) + '&e=' + encodeURIComponent(exampleId) + '&topic=' + encodeURIComponent(selected[2]);
+        webhook = 'https://eockgzovo96ozny.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=' + encodeURIComponent(i) + '&e=' + encodeURIComponent(exampleId) + '&topic=' + encodeURIComponent(selected[0]) + '&goal=' + encodeURIComponent(selected[1]);
         fetch(webhook)
             .then(response => response.json())
             .then(data => {
@@ -215,16 +215,16 @@
       
       // Priority buttons
       $('#lowPMF').click(function() {
-        getFirstIdea('#lowPMF', ['lowPMF', 'getting more users / customers']);
+        getFirstIdea('#lowPMF', ['lowPMF', 'getting more users / customers', 'get more users / customers']);
       });
       $('#prePMF').click(function() {
-        getFirstIdea('#prePMF', ['prePMF', 'getting as many signups as possible']);
+        getFirstIdea('#prePMF', ['prePMF', 'getting as many signups as possible', 'get as many signups as possible']);
       });
       $('#postPMF').click(function() {
-        getFirstIdea('#postPMF', ['postPMF', 'optimising onboarding + retention']);
+        getFirstIdea('#postPMF', ['postPMF', 'optimising onboarding + retention', 'optimise onboarding + retention']);
       });
       $('#scaleUP').click(function() {
-        getFirstIdea('#scaleUP', ['scaleUP', 'growing recurring revenue']);
+        getFirstIdea('#scaleUP', ['scaleUP', 'growing recurring revenue', 'grow recurring revenue']);
       });
 
 
@@ -280,7 +280,7 @@
         });
 
         // Prep Stripe link
-        var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x) + '&priority=' + encodeURIComponent(selected[2]);
+        var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x) + '&priority=' + encodeURIComponent(selected[0]);
         fetch(webhook)
           .then(response => response.json())
           .then(data => {
