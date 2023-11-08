@@ -114,6 +114,9 @@
         if (matches) {
             x = matches[0];
         }
+
+        webhook = 'https://eon50fnxq1hplnj.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=no' + '&e=' + encodeURIComponent(exampleId);
+        fetch(webhook);
       }
       
       // Run with domain url parameter
@@ -212,16 +215,16 @@
       
       // Priority buttons
       $('#lowPMF').click(function() {
-        getFirstIdea('#growth', ['Growth', 'more users', 'Growth', 'growth']);
+        getFirstIdea('#lowPMF', ['lowPMF', 'getting more users / customers']);
       });
       $('#prePMF').click(function() {
-        getFirstIdea('#monetisation', ['Monetisation', 'more money', 'Purchasing', 'monetisation']);
+        getFirstIdea('#prePMF', ['prePMF', 'getting as many signups as possible']);
       });
       $('#postPMF').click(function() {
-        getFirstIdea('#habits', ['Habit-Building', 'more user engagement', 'Habits', 'engagement']);
+        getFirstIdea('#postPMF', ['postPMF', 'optimising onboarding + retention']);
       });
       $('#scaleUP').click(function() {
-        getFirstIdea('#habits', ['Habit-Building', 'more user engagement', 'Habits', 'engagement']);
+        getFirstIdea('#scaleUP', ['scaleUP', 'growing recurring revenue']);
       });
 
 
@@ -257,14 +260,14 @@
             
         // Pipedream 3 Previews
 
-        webhook = 'https://eo2vwqqmaeev0sz.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[2]);
+        webhook = 'https://eo2vwqqmaeev0sz.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[0]);
         fetch(webhook)
         .then(response => response.json())
         .then(data => {
           clearInterval(loadingInterval);
           $('#loadingMoreDiv').hide();
-          $('#30ideaIntro').text('Ok, here are a few more ' + selected[3] + ' hacks you really should try:');
-          $('#getMoreDescription').text('Get these 3 ' + selected[3] + ' recommendations for ' + companyName);
+          $('#30ideaIntro').text('Ok, here are a few more hacks you really should try:');
+          $('#getMoreDescription').text('Get these 3 recommendations for ' + companyName);
           let formattedText = data.result.replace(/\n/g, '<br>');
           $("#finalIdeas").html(formattedText);
           $("#finalIdeasDiv").css("display", "flex");
