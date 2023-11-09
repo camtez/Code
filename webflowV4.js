@@ -171,7 +171,7 @@
               let firstText = data.keyInsight + "\n";
               firstText = firstText.replace(/\n/g, '<br>');
               let secondText = "Here's something you can do right now.\n\n" + data.copyNpaste;
-              secondText = data.partTwo.replace(/\n/g, '<br>');
+              secondText = secondText.replace(/\n/g, '<br>');
               $("#output0intro").html(formattedText);
               $("#output0").html(formattedText);
               $("#output0inspired").html(data.inspiredBy);
