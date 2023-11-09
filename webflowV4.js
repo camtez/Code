@@ -89,7 +89,7 @@
 
         // Display more box
         $("#questionMore").css("display", "flex");
-        $("#divAnimate").css("max-height", "3000px");
+        $("#divAnimate").css("max-height", "5000px");
         $("#divAnimate").css("opacity", 1);
         $("#spacer300").show(); // moves the footer down
         $("#subtitle2").hide(); // hides error message
@@ -166,11 +166,11 @@
               clearInterval(loadingInterval); // Stop loading message
               companyName = data.productName;
               companyType = data.productType;
-              let introText = companyName + " - cool " + companyType + "\n\nBut do you have a game plan for this? " + data.specificChallenge;
+              let introText = companyName + ". Looks like a cool " + companyType + ".\n\nBut do you have a game plan for this? " + data.specificChallenge + "\n";
               introText = introText.replace(/\n/g, '<br>');
-              let firstText = data.keyInsight + "\n";
+              let firstText = "I've pieced together a blueprint for something profound.\n\n" + data.keyInsight;
               firstText = firstText.replace(/\n/g, '<br>');
-              let secondText = "Here's something you can do right now.\n\n" + data.copyNpaste;
+              let secondText = "Start here, start now. It's that simple.\n\n" + data.copyNpaste;
               secondText = secondText.replace(/\n/g, '<br>');
               $("#output0intro").html(introText);
               $("#output0").html(firstText);
@@ -193,7 +193,7 @@
                   $("#continueReading2").show();
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
-                    $("#questionWhichText").html("we just scratched the surface of " + selected[1] + ". Ready for more strategies to really master it?");
+                    $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ". Ready for more strategies to really master it?");
                     setTimeout(() => { // Show question which
                       $("#typingAnimation2").hide();
                       $("#whichDiv").css("display", "flex");
@@ -215,16 +215,16 @@
       
       // Priority buttons
       $('#lowPMF').click(function() {
-        getFirstIdea('#lowPMF', ['lowPMF', 'getting more users / customers', 'get more users / customers']);
+        getFirstIdea('#lowPMF', ['lowPMF', 'getting more users / customers', 'get more users / customers', 'more users / customers']);
       });
       $('#prePMF').click(function() {
-        getFirstIdea('#prePMF', ['prePMF', 'getting as many signups as possible', 'get as many signups as possible']);
+        getFirstIdea('#prePMF', ['prePMF', 'getting as many signups as possible', 'get as many signups as possible', 'exponential signups']);
       });
       $('#postPMF').click(function() {
-        getFirstIdea('#postPMF', ['postPMF', 'optimising onboarding + retention', 'optimise onboarding + retention']);
+        getFirstIdea('#postPMF', ['postPMF', 'optimising onboarding + retention', 'optimise onboarding + retention', 'optimised onboarding + retention']);
       });
       $('#scaleUP').click(function() {
-        getFirstIdea('#scaleUP', ['scaleUP', 'growing recurring revenue', 'grow recurring revenue']);
+        getFirstIdea('#scaleUP', ['scaleUP', 'growing recurring revenue', 'grow recurring revenue', 'more recurring revenue']);
       });
 
 
@@ -266,13 +266,19 @@
         .then(data => {
           clearInterval(loadingInterval);
           $('#loadingMoreDiv').hide();
-          $('#30ideaIntro').text('Out of our aresenal of 279 product strategies, these 3 are the highest impact strategies a ' + companyType + ' like ' + companyName + ' can implement to ' + selected[2] + '.');
-          $("#idea1summary").text(data[0].specificName + " - a game changer. " + data[0].specificChallenge);
+          $('#30ideaIntro').text('Out of our arsenal of 279 product strategies, these 3 are the highest impact strategies a ' + companyType + ' like ' + companyName + ' can implement to ' + selected[2] + '.');
+          $("#idea1name").text(data[0].specificName);
+          $("#idea1summary").text(data[0].specificChallenge);
           $("#idea1inspired").text(data[0].inspiredBy);
-          $("#idea2summary").text(data[1].specificName + " - the next big leap forward. " + data[1].specificChallenge);
+          $("#idea2name").text(data[1].specificName);
+          $("#idea2summary").text(data[1].specificChallenge);
           $("#idea2inspired").text(data[1].inspiredBy);
-          $("#idea3summary").text(data[2].specificName + " - a revolution in the making. " + data[2].specificChallenge);
+          $("#idea3name").text(data[2].specificName);
+          $("#idea3summary").text(data[2].specificChallenge);
           $("#idea3inspired").text(data[2].inspiredBy);
+          //$("#idea3summary").text(data[2].specificName + ". " + data[2].specificChallenge);
+
+          $("#blueprintsIntro").text("I know you want " + selected[3] + " ASAP.");
           $("#blueprintsText").text("That's why I've crafted 3 bespoke Conversion Blueprints™ just for " + companyName + ".");
           $("#blueprintsBenefit1").text("Built on top of our proprietary research into how " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName + " did it");
           $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
