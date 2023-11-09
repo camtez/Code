@@ -35,6 +35,7 @@
       const errorMessage = "There's been a hiccup. Let's make it work this time.";
       let id = "";
       let companyName = "";
+      let companyType = "";
       let contactId = "";
       let loadingInterval;
       let lastIdeaText = "";
@@ -64,14 +65,6 @@
         }
         lastIdeaText = randomExpression;
         return randomExpression;
-      }
-
-      function replaceText(apiMessage) {
-        let tempMessage = apiMessage;
-        
-        tempMessage = tempMessage.split(/\n\n\n/).map(idea => idea.replace(/Feature idea:|Feature idea name:/g,getRandomIdeaText())).join('\n\n\n');
-        tempMessage = tempMessage.replace(/\n/g, '<br>');
-        return tempMessage;
       }
 
     
@@ -171,13 +164,20 @@
             .then(data => {
               console.log(data);
               clearInterval(loadingInterval); // Stop loading message
-              let firstText = data.partOne.replace(/\n/g, '<br>');
-              let secondText = data.partTwo.replace(/\n/g, '<br>');
-              companyName = data.company;
-              formattedText = replaceText(firstText);
+              companyName = data.productName;
+              companyType = data.productType;
+              let introText = companyName + " - cool " + companyType + "\n\nBut do you have a game plan for this? " + data.specificChallenge;
+              introText = introText.replace(/\n/g, '<br>');
+              let firstText = data.keyInsight + "\n";
+              firstText = firstText.replace(/\n/g, '<br>');
+              let secondText = "Here's something you can do right now.\n\n" + data.copyNpaste;
+              secondText = data.partTwo.replace(/\n/g, '<br>');
+              $("#output0intro").html(formattedText);
               $("#output0").html(formattedText);
+              $("#output0inspired").html(data.inspiredBy);
               $("#progressBar0").hide();
-              $("#continueReading").show();
+              $("#output0intro").show();
+              $("#output0inspiredDiv").show();
               $("#question1").css("display", "flex");
               $("#enter").css("opacity", 0);
               success = 1;
@@ -193,10 +193,10 @@
                   $("#continueReading2").show();
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
+                    $("#questionWhichText").html("we just scratched the surface of " + selected[1] + ". Ready for more strategies to really master it?");
                     setTimeout(() => { // Show question which
                       $("#typingAnimation2").hide();
                       $("#whichDiv").css("display", "flex");
-                      $("#output0How").html(secondText);
                     }, 3500); 
                   }, 4000);
                 }, 5000);
@@ -260,16 +260,22 @@
             
         // Pipedream 3 Previews
 
-        webhook = 'https://eorwuqt7mxl6p1p.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[0]);
+        webhook = 'https://eorwuqt7mxl6p1p.m.pipedream.net/?x=' + encodeURIComponent(x) + '&topic=' + encodeURIComponent(selected[0]) + '&i=1';
         fetch(webhook)
         .then(response => response.json())
         .then(data => {
           clearInterval(loadingInterval);
           $('#loadingMoreDiv').hide();
-          $('#30ideaIntro').text('Ok, here are a few more hacks you really should try:');
-          $('#getMoreDescription').text('Get these 3 recommendations for ' + companyName);
-          let formattedText = data.result.replace(/\n/g, '<br>');
-          $("#finalIdeas").html(formattedText);
+          $('#30ideaIntro').text('Out of our aresenal of 279 product strategies, these 3 are the highest impact strategies a ' + companyType + ' like ' + companyName + ' can implement to ' + selected[2] + '.');
+          $("#idea1summary").text(data[0].specificName + " - a game changer. " + data[0].specificChallenge);
+          $("#idea1inspired").text(data[0].inspiredBy);
+          $("#idea2summary").text(data[1].specificName + " - the next big leap forward. " + data[1].specificChallenge);
+          $("#idea2inspired").text(data[1].inspiredBy);
+          $("#idea3summary").text(data[2].specificName + " - a revolution in the making. " + data[2].specificChallenge);
+          $("#idea3inspired").text(data[2].inspiredBy);
+          $("#blueprintsText").text("That's why I've crafted 3 bespoke Conversion Blueprints™ just for " + companyName + ".");
+          $("#blueprintsBenefit1").text("Built on top of our proprietary research into how " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName + " did it");
+          $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
           $("#finalIdeasDiv").css("display", "flex");
           $("#finalIdeasDiv2").css("display", "flex");
         })
