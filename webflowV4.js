@@ -172,8 +172,8 @@
               firstText = firstText.replace(/\n/g, '<br>');
               let secondText = "Here's something you can do right now.\n\n" + data.copyNpaste;
               secondText = secondText.replace(/\n/g, '<br>');
-              $("#output0intro").html(formattedText);
-              $("#output0").html(formattedText);
+              $("#output0intro").html(introText);
+              $("#output0").html(firstText);
               $("#output0inspired").html(data.inspiredBy);
               $("#progressBar0").hide();
               $("#output0intro").show();
