@@ -320,8 +320,8 @@
       // Click get later after 3 previews
 
       $('#getFree').click(function() {
-        $("#signupIntro").text('Make ' + companyName + ' greater, with less guesswork');
-        $("#signupDescription").text('Get a free weekly AI-personalised recommendation to make ' + companyName + ' easier to use, more shareable & stickier.');
+        $("#signupIntro").text('Keep making ' + companyName + ' greater');
+        $("#signupDescription").text('Get a reminder in your email + a couple little bonuses');
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
