@@ -166,11 +166,11 @@
               clearInterval(loadingInterval); // Stop loading message
               companyName = data.productName;
               companyType = data.productType;
-              let introText = companyName + ". Looks like a cool " + companyType + ".\n\nBut do you have a game plan for this? " + data.specificChallenge + "\n";
+              let introText = companyName + ". Looks like a cool " + companyType + ".\n\nBut do you have a game plan for this? " + data.specificChallenge + "\n\n";
               introText = introText.replace(/\n/g, '<br>');
-              let firstText = "I've pieced together a blueprint for something profound.\n\n" + data.keyInsight;
+              let firstText = "I've got an idea for something profound.\n\n" + data.keyInsight;
               firstText = firstText.replace(/\n/g, '<br>');
-              let secondText = "Start here, start now. It's that simple.\n\n" + data.copyNpaste;
+              let secondText = "Here's something you can do right now. It's as simple as a copy and paste to " + selected[2] + ".\n\n" + data.copyNpaste;
               secondText = secondText.replace(/\n/g, '<br>');
               $("#output0intro").html(introText);
               $("#output0").html(firstText);
@@ -193,7 +193,7 @@
                   $("#continueReading2").show();
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
-                    $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ". Ready for more strategies to really master it?");
+                    $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ".\n\nReady for more strategies to really master it?");
                     setTimeout(() => { // Show question which
                       $("#typingAnimation2").hide();
                       $("#whichDiv").css("display", "flex");
@@ -266,7 +266,7 @@
         .then(data => {
           clearInterval(loadingInterval);
           $('#loadingMoreDiv').hide();
-          $('#30ideaIntro').text('Out of our arsenal of 279 product strategies, these 3 are the highest impact strategies a ' + companyType + ' like ' + companyName + ' can implement to ' + selected[2] + '.');
+          $('#30ideaIntro').html('Out of our arsenal of 279 product strategies, these 3 are the <strong>highest impact strategies a ' + companyType + ' like ' + companyName + ' can implement</strong> to ' + selected[2] + '.');
           $("#idea1name").text(data[0].specificName);
           $("#idea1summary").text(data[0].specificChallenge);
           $("#idea1inspired").text(data[0].inspiredBy);
@@ -278,8 +278,8 @@
           $("#idea3inspired").text(data[2].inspiredBy);
           //$("#idea3summary").text(data[2].specificName + ". " + data[2].specificChallenge);
 
-          $("#blueprintsIntro").text("I know you want " + selected[3] + " ASAP.");
-          $("#blueprintsText").text("That's why I've crafted 3 bespoke Conversion Blueprints™ just for " + companyName + ".");
+          $("#blueprintsIntro").text("Don't miss these breakthrough opportunities for " + selected[3] + ".");
+          $("#blueprintsText").text("I've simplified these 3 insights into bespoke Conversion Blueprints™ just for " + companyName + ".");
           $("#blueprintsBenefit1").text("Built on top of our proprietary research into how " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName + " did it");
           $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
           $("#finalIdeasDiv").css("display", "flex");
