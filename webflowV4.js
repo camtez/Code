@@ -4,6 +4,9 @@
     Webflow.push(function () {
       // DOMready has fired
       // May now use jQuery and Webflow API
+
+      var pageTitle = document.title;
+      mixpanel.track("PV: " + pageTitle);
       
       // prefill forms other info
       $("#formOtherNav").val("SU");
@@ -177,17 +180,21 @@
               clearInterval(loadingInterval); // Stop loading message
               companyName = data.productName;
               companyType = data.productType;
-              let introText = companyName + ". Cool " + companyType + ".\n\nBut do you have a game plan for this?\n\n" + data.specificChallenge + "\n\n";
+              let lowercaseChallenge = data.specificChallenge.charAt(0).toLowerCase() + data.specificChallenge.slice(1);
+              let titleText = companyName + ". Cool " + companyType + ".";
+              let introText = "But what's your game plan for " + lowercaseChallenge + "?\n\n";
               introText = introText.replace(/\n/g, '<br>');
-              let firstText = "I've got an idea for something profound.\n\n" + data.keyInsight;
+              let firstText = "I've got an idea.\n\n" + data.keyInsight;
               firstText = firstText.replace(/\n/g, '<br>');
-              let secondText = "Here's something you can do right now. It's as simple as a copy and paste to " + selected[2] + ".\n\n" + data.copyNpaste;
+              let secondText = "I've done the hard work for you.\n\n" + data.howToUse;
               secondText = secondText.replace(/\n/g, '<br>');
+              $("#output0title").html(titleText);
               $("#output0intro").html(introText);
               $("#output0").html(firstText);
               $("#output0inspired").html(data.inspiredBy);
               $("#progressBar0").hide();
               $("#output0intro").show();
+              $("#output0title").show();
               $("#output0inspiredDiv").show();
               $("#question1").css("display", "flex");
               $("#enter").css("opacity", 0);
@@ -203,12 +210,13 @@
                   $("#typingAnimation").hide();
                   $("#messageDiv0-5").show();
                   $("#output0How").html(secondText);
+                  $("#copyNpaste").html(data.copyNpaste.replace(/\n/g, '<br>'));
                   $("#continueReading2").show();
                   smoothScrollBy(60, 1000);
                   $("#message0-5").css("margin-top", "40px");
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
-                    $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ".\n\nReady for more strategies to really master it?");
+                    $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ".\n\nReady for 3 even greater strategies to help really master it?");
                     smoothScrollBy(30, 1000);
                     setTimeout(() => { // Show question which
                       smoothScrollBy(30, 1000);
@@ -256,7 +264,7 @@
       // Continue reading second message
       $('#continueReading2').click(function() {
         $('#continueReading2').hide();
-        $("#output0How").css("max-height", "none");
+        $("#copyDiv").css("display", "flex");
         mixpanel.track('Continue Reading 2 Click');
       });
 
@@ -302,7 +310,7 @@
 
           $("#blueprintsTitle").text("Here's the plan for " + companyName + ".");
           $("#blueprintsIntro").text("I know you don't have time to read through all the generic strategies for " + selected[1] + ".");
-          $("#blueprintsText").text("So I've crafted these 3 insights into actionable Conversion Blueprints™ just for " + companyName + ".");
+          $("#blueprintsText").text("So I've crafted these 3 top priority insights into actionable Conversion Blueprints™ just for you" + companyName + ".");
           $("#blueprintsBenefit1").text("Built on top of our proprietary research into how " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName + " did it");
           $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
           $("#finalIdeasDiv").css("display", "flex");
@@ -322,7 +330,7 @@
           .then(data => {
           let url = data.result;
           $("#getPaid").attr("href", url); // set #getPaid link to returned value
-
+          mixpanel.track_links('#getPaid', 'Clicked Buy Conversion Blueprints');
           })
           .catch(error => {
           clearInterval(loadingInterval);
@@ -335,24 +343,26 @@
 
       // Click get later
       $('#getLater').click(function() {
-        $("#signupIntro").text('Keep making ' + companyName + ' greater');
-        $("#signupDescription").text('Get a reminder in your email + a couple little bonuses');
+        $("#signupIntro").text('Keep making ' + companyName + ' greater by copying what works');
+        $("#signupDescription").text('Get a free product insight in your email every week, personalised just for ' + companyName);
+        $('#subscribe').text("Try it");
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
-        mixpanel.track('Get Later Click');
+        mixpanel.track('Sign Up Interest 1 Click');
         smoothScrollBy(100, 1000);
       });
 
       // Click get later after 3 previews
 
       $('#getFree').click(function() {
-        $("#signupIntro").text('Keep making ' + companyName + ' greater');
-        $("#signupDescription").text('Get a reminder in your email + a couple little bonuses');
+        $("#signupIntro").text('Keep making ' + companyName + ' greater by copying what works');
+        $("#signupDescription").text('Get a free product insight in your email every week, personalised just for ' + companyName);
+        $('#subscribe').text("Try it");
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
-        mixpanel.track('Save Offer Click');
+        mixpanel.track('Sign Up Interest 2 Click');
         smoothScrollBy(100, 1000);
       });
 

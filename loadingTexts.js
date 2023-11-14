@@ -1,6 +1,6 @@
 var loadingTexts0 = [    
             'Reading your website.','Reading your website..','Reading your website...',
-            'Analyising it.', 'Analyising it..', 'Analyising it...',
+            'Analysing it.', 'Analysing it..', 'Analysing it...',
             'Getting into the shoes of your customers.', 'Getting into the shoes of your customers..', 'Getting into the shoes of your customers...',
             'Zooming into the core challenges.', 'Zooming into the core challenges..', 'Zooming into the core challenges...',
             'We\'re about to change everything.', 'We\'re about to change everything..', 'We\'re about to change everything...',
