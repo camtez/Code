@@ -131,12 +131,14 @@
       // Run on enter click
       $('#enter').click(function() {
         enterDomain();
+        mixpanel.track('Enter Click');
       });
 
       // Run on enter keyboard
       $('#domain').keydown(function(event) {
         if (event.key === 'Enter' || event.keyCode === 13) {
           enterDomain();
+          mixpanel.track('Enter Keyboard');
         }
       });
 
@@ -147,6 +149,7 @@
       var success = -1;
       function getFirstIdea(selectedID, array) {
 
+        mixpanel.track('Click '+ selectedID);
         if (success != -1) {
           console.log("Function is already running.");
           return;
@@ -244,12 +247,14 @@
       $('#continueReading').click(function() {
         $('#continueReading').hide();
         $("#output0").css("max-height", "none");
+        mixpanel.track('Continue Reading 1 Click');
       });
 
       // Continue reading second message
       $('#continueReading2').click(function() {
         $('#continueReading2').hide();
         $("#output0How").css("max-height", "none");
+        mixpanel.track('Continue Reading 2 Click');
       });
 
 
@@ -328,6 +333,7 @@
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
+        mixpanel.track('Get Later Click');
         smoothScrollBy(100, 1000);
       });
 
@@ -339,6 +345,7 @@
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
+        mixpanel.track('Save Offer Click');
         smoothScrollBy(100, 1000);
       });
 
@@ -348,6 +355,7 @@
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $("#3ideasDiv").css("display", "flex");
+        mixpanel.track('Buy Now Click');
         get3Ideas();
       });
 
@@ -381,12 +389,14 @@
 
       // Click subscribe button
       $('#subscribe').click(function() {
+        mixpanel.track('Subscribe Click');
         subscribeToNewsletter();
       });
 
       // Enter keyboard subscribe
       $('#email').keydown(function(event) {
         if (event.key === 'Enter' || event.keyCode === 13) {
+          mixpanel.track('Subscribe Keyboard');
           subscribeToNewsletter();
         }
       });
