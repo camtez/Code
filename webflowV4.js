@@ -67,6 +67,12 @@
         return randomExpression;
       }
 
+      function smoothScrollBy(distance, duration) {
+        $('html, body').animate({
+          scrollTop: $(window).scrollTop() + distance
+        }, duration);
+      }
+
     
       // STEP 1: Entering domain -> questionMore
 
@@ -93,6 +99,7 @@
         $("#divAnimate").css("opacity", 1);
         $("#spacer300").show(); // moves the footer down
         $("#subtitle2").hide(); // hides error message
+        smoothScrollBy(100, 1000);
 
         // Re-style input bar
         $("#enter").text("✅");
@@ -151,6 +158,7 @@
         $("#questionMore").css("opacity", 0.75);
         $('.button.check').css('border-color', '#E9F0EC');
         $(selectedID).css('background-color', '#E9F0EC');
+        smoothScrollBy(40, 1000);
 
         // Loading animation
         $("#output0").css('color', 'black');
@@ -166,7 +174,7 @@
               clearInterval(loadingInterval); // Stop loading message
               companyName = data.productName;
               companyType = data.productType;
-              let introText = companyName + ". Looks like a cool " + companyType + ".\n\nBut do you have a game plan for this? " + data.specificChallenge + "\n\n";
+              let introText = companyName + ". Cool " + companyType + ".\n\nBut do you have a game plan for this?\n\n" + data.specificChallenge + "\n\n";
               introText = introText.replace(/\n/g, '<br>');
               let firstText = "I've got an idea for something profound.\n\n" + data.keyInsight;
               firstText = firstText.replace(/\n/g, '<br>');
@@ -180,6 +188,7 @@
               $("#output0inspiredDiv").show();
               $("#question1").css("display", "flex");
               $("#enter").css("opacity", 0);
+              smoothScrollBy(100, 1000);
               success = 1;
               setTimeout(() => {
                 $("#enter").hide();
@@ -191,10 +200,13 @@
                   $("#messageDiv0-5").show();
                   $("#output0How").html(secondText);
                   $("#continueReading2").show();
+                  smoothScrollBy(60, 1000);
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
                     $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ".\n\nReady for more strategies to really master it?");
+                    smoothScrollBy(30, 1000);
                     setTimeout(() => { // Show question which
+                      smoothScrollBy(30, 1000);
                       $("#typingAnimation2").hide();
                       $("#whichDiv").css("display", "flex");
                     }, 3500); 
@@ -284,6 +296,7 @@
           $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
           $("#finalIdeasDiv").css("display", "flex");
           $("#finalIdeasDiv2").css("display", "flex");
+          smoothScrollBy(100, 1000);
         })
         .catch(error => {
           clearInterval(loadingInterval);
@@ -315,6 +328,7 @@
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
+        smoothScrollBy(100, 1000);
       });
 
       // Click get later after 3 previews
@@ -325,6 +339,7 @@
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
+        smoothScrollBy(100, 1000);
       });
 
 
