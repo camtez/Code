@@ -192,6 +192,7 @@
               $("#question1").css("display", "flex");
               $("#enter").css("opacity", 0);
               smoothScrollBy(100, 1000);
+              $("#message0").css("margin-top", "40px");
               success = 1;
               setTimeout(() => {
                 $("#enter").hide();
@@ -204,6 +205,7 @@
                   $("#output0How").html(secondText);
                   $("#continueReading2").show();
                   smoothScrollBy(60, 1000);
+                  $("#message0-5").css("margin-top", "40px");
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
                     $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ".\n\nReady for more strategies to really master it?");
@@ -212,6 +214,7 @@
                       smoothScrollBy(30, 1000);
                       $("#typingAnimation2").hide();
                       $("#whichDiv").css("display", "flex");
+                      $("#questionWhich").css("margin-top", "40px");
                     }, 3500); 
                   }, 4000);
                 }, 5000);
@@ -283,7 +286,9 @@
         .then(data => {
           clearInterval(loadingInterval);
           $('#loadingMoreDiv').hide();
-          $('#30ideaIntro').html('Out of our arsenal of 279 product strategies, these 3 are the <strong>highest impact strategies a ' + companyType + ' like ' + companyName + ' can implement</strong> to ' + selected[2] + '.');
+          $("#3IdeasDiv").css("margin-top", "40px");
+          $('#30ideaTitle').text('The 3 highest impact strategies for ' + companyName);
+          $('#30ideaIntro').html('Out of our arsenal of 279 product strategies, these are the most relevant for ' + companyName + ' to ' + selected[2] + '.');
           $("#idea1name").text(data[0].specificName);
           $("#idea1summary").text(data[0].specificChallenge);
           $("#idea1inspired").text(data[0].inspiredBy);
@@ -295,8 +300,9 @@
           $("#idea3inspired").text(data[2].inspiredBy);
           //$("#idea3summary").text(data[2].specificName + ". " + data[2].specificChallenge);
 
-          $("#blueprintsIntro").text("Don't miss these breakthrough opportunities for " + selected[3] + ".");
-          $("#blueprintsText").text("I've simplified these 3 insights into bespoke Conversion Blueprints™ just for " + companyName + ".");
+          $("#blueprintsTitle").text("Here's the plan for " + companyName + ".");
+          $("#blueprintsIntro").text("I know you don't have time to read through all the generic strategies for " + selected[1] + ".");
+          $("#blueprintsText").text("So I've crafted these 3 insights into actionable Conversion Blueprints™ just for " + companyName + ".");
           $("#blueprintsBenefit1").text("Built on top of our proprietary research into how " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName + " did it");
           $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
           $("#finalIdeasDiv").css("display", "flex");
@@ -316,6 +322,7 @@
           .then(data => {
           let url = data.result;
           $("#getPaid").attr("href", url); // set #getPaid link to returned value
+
           })
           .catch(error => {
           clearInterval(loadingInterval);
@@ -355,7 +362,7 @@
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
         $("#3ideasDiv").css("display", "flex");
-        mixpanel.track('Buy Now Click');
+        mixpanel.track('3 More Click');
         get3Ideas();
       });
 

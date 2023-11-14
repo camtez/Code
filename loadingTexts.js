@@ -1,17 +1,14 @@
-var loadingTexts0 = [
-            'Designing your next best move.', 'Designing your next best move..', 'Designing your next best move...',
-            'Bear with us, magic takes a moment.', 'Bear with us, magic takes a moment..', 'Bear with us, magic takes a moment...',    
-            'Diving into your website.', 'Diving into your website..', 'Diving into your website...',
-            'Walking through your digital universe.', 'Walking through your digital universe..', 'Walking through your digital universe...',
+var loadingTexts0 = [    
+            'Reading your website.','Reading your website..','Reading your website...',
+            'Analyising it.', 'Analyising it..', 'Analyising it...',
             'Getting into the shoes of your customers.', 'Getting into the shoes of your customers..', 'Getting into the shoes of your customers...',
-            'Hang tight.', 'Hang tight..', 'Hang tight...',
-            'Stirring the pot of innovation.', 'Stirring the pot of innovation..', 'Stirring the pot of innovation...',
             'Zooming into the core challenges.', 'Zooming into the core challenges..', 'Zooming into the core challenges...',
-            'Exploring the universe of current brilliance.', 'Exploring the universe of current brilliance..', 'Exploring the universe of current brilliance...',
             'We\'re about to change everything.', 'We\'re about to change everything..', 'We\'re about to change everything...',
             'Making it just right.', 'Making it just right..', 'Making it just right...',
+            'Hang tight.', 'Hang tight..', 'Hang tight...',
             'One more thing.', 'One more thing..', 'One more thing...',
-            'Simplifying.', 'Simplifying..', 'Simplifying...'
+            'Smoothing the edges.', 'Smoothing the edges..', 'Smoothing the edges...',
+            'Bear with us, magic takes a moment.', 'Bear with us, magic takes a moment..', 'Bear with us, magic takes a moment...'
             ];
 
 var loadingTexts1 = [
@@ -20,11 +17,17 @@ var loadingTexts1 = [
             'Distilling the real issues at hand.', 'Distilling the real issues at hand..', 'Distilling the real issues at hand...',
             'This is huge.', 'This is huge..', 'This is huge...',
             'Infusing it with wonder.', 'Infusing it with wonder..', 'Infusing it with wonder...',
+            'Simplifying.', 'Simplifying..', 'Simplifying...',
             'Smoothing the edges.', 'Smoothing the edges..', 'Smoothing the edges...',
+            'Designing your next best move.', 'Designing your next best move..', 'Designing your next best move...',
+            'Exploring the universe of current brilliance.', 'Exploring the universe of current brilliance..', 'Exploring the universe of current brilliance...',
+            'Stirring the pot of innovation.', 'Stirring the pot of innovation..', 'Stirring the pot of innovation...',
             'One more thing.', 'One more thing..', 'One more thing...'
             ];
 
 var loadingTexts2 = [
+            'Distilling the real issues at hand.', 'Distilling the real issues at hand..', 'Distilling the real issues at hand...',
+            'Thinking different.', 'Thinking different..', 'Thinking different...',
             'Cooking up some insanely great ideas.', 'Cooking up some insanely great ideas..', 'Cooking up some insanely great ideas...',
             'Talking to the folks who truly care about your product.', 'Talking to the folks who truly care about your product..', 'Talking to the folks who truly care about your product...',
             'Just a moment, you\'re going to love what\'s next.', 'Just a moment, you\'re going to love what\'s next..', 'Just a moment, you\'re going to love what\'s next...',
