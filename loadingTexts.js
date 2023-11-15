@@ -3,6 +3,7 @@ var loadingTexts0 = [
             'Analysing it.', 'Analysing it..', 'Analysing it...',
             'Getting into the shoes of your customers.', 'Getting into the shoes of your customers..', 'Getting into the shoes of your customers...',
             'Zooming into the core challenges.', 'Zooming into the core challenges..', 'Zooming into the core challenges...',
+            'Designing your next best move.', 'Designing your next best move..', 'Designing your next best move...',
             'We\'re about to change everything.', 'We\'re about to change everything..', 'We\'re about to change everything...',
             'Making it just right.', 'Making it just right..', 'Making it just right...',
             'Hang tight.', 'Hang tight..', 'Hang tight...',

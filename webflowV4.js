@@ -181,13 +181,13 @@
               companyName = data.productName;
               companyType = data.productType;
               let lowercaseChallenge = data.specificChallenge.charAt(0).toLowerCase() + data.specificChallenge.slice(1);
-              let titleText = companyName + ". Cool " + companyType + ".";
-              let introText = "But what's your game plan for " + lowercaseChallenge + "?\n\n";
+              lowercaseChallenge = lowercaseChallenge.substring(0, lowercaseChallenge.length - 1) + '?';
+              let titleText = companyName + ". Looks like a cool " + companyType + ".";
+              let introText = "But what's your game plan for " + lowercaseChallenge + "\n\n";
               introText = introText.replace(/\n/g, '<br>');
               let firstText = "I've got an idea.\n\n" + data.keyInsight;
               firstText = firstText.replace(/\n/g, '<br>');
-              let secondText = "I've done the hard work for you.\n\n" + data.howToUse;
-              secondText = secondText.replace(/\n/g, '<br>');
+              let secondText = data.howToUse;
               $("#output0title").html(titleText);
               $("#output0intro").html(introText);
               $("#output0").html(firstText);
@@ -216,14 +216,10 @@
                   $("#message0-5").css("margin-top", "40px");
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
-                    $("#questionWhichText").html("We just scratched the surface of " + selected[1] + ".\n\nReady for 3 even greater strategies to help really master it?");
+                    let scratchedText = "We just scratched the surface of " + selected[1] + ".\n\nReady for 3 even greater strategies to help really master it?";
+                    scratchedText = scratchedText.replace(/\n/g, '<br>');
+                    $("#questionWhichText").html(scratchedText);
                     smoothScrollBy(30, 1000);
-                    setTimeout(() => { // Show question which
-                      smoothScrollBy(30, 1000);
-                      $("#typingAnimation2").hide();
-                      $("#whichDiv").css("display", "flex");
-                      $("#questionWhich").css("margin-top", "40px");
-                    }, 3500); 
                   }, 4000);
                 }, 5000);
               }, 3000);
@@ -264,8 +260,15 @@
       // Continue reading second message
       $('#continueReading2').click(function() {
         $('#continueReading2').hide();
+        $("#output0How").html(secondText);
         $("#copyDiv").css("display", "flex");
         mixpanel.track('Continue Reading 2 Click');
+        setTimeout(() => { // Show question which
+          smoothScrollBy(30, 1000);
+          $("#typingAnimation2").hide();
+          $("#whichDiv").css("display", "flex");
+          $("#questionWhich").css("margin-top", "40px");
+        }, 3500);
       });
 
 
@@ -313,6 +316,7 @@
           $("#blueprintsText").text("So I've crafted these 3 top priority insights into actionable Conversion Blueprints™ just for you" + companyName + ".");
           $("#blueprintsBenefit1").text("Built on top of our proprietary research into how " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName + " did it");
           $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
+          $("#dontMiss").text("Don't miss your actionable guide to " + selected[2] + " just like " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName);
           $("#finalIdeasDiv").css("display", "flex");
           $("#finalIdeasDiv2").css("display", "flex");
           smoothScrollBy(100, 1000);
