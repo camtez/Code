@@ -9,7 +9,12 @@ var loadingTexts0 = [
             'Hang tight.', 'Hang tight..', 'Hang tight...',
             'One more thing.', 'One more thing..', 'One more thing...',
             'Smoothing the edges.', 'Smoothing the edges..', 'Smoothing the edges...',
-            'Bear with us, magic takes a moment.', 'Bear with us, magic takes a moment..', 'Bear with us, magic takes a moment...'
+            'Bear with us, magic takes a moment.', 'Bear with us, magic takes a moment..', 'Bear with us, magic takes a moment...',
+            'My tempo\'s a notch down today, your patience is appreciated.','My tempo\'s a notch down today, your patience is appreciated..','My tempo\'s a notch down today, your patience is appreciated...',
+            'A cup of coffee might have been a good idea this morning.','A cup of coffee might have been a good idea this morning..','A cup of coffee might have been a good idea this morning...',
+            'Seems I\'m still on a creative detour.','Seems I\'m still on a creative detour..','Seems I\'m still on a creative detour...',
+            'Let\'s pause in our discourse to appreciate the day\'s beauty.','Let\'s pause in our discourse to appreciate the day\'s beauty..','Let\'s pause in our discourse to appreciate the day\'s beauty...',
+            'Alright, diving back in now.','Alright, diving back in now..','Alright, diving back in now...'
             ];
 
 var loadingTexts1 = [
