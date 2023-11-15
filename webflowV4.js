@@ -188,10 +188,15 @@
               let firstText = "I've got an idea.\n\n" + data.keyInsight;
               firstText = firstText.replace(/\n/g, '<br>');
               let secondText = data.howToUse;
+              $("#output0How").html(secondText);
+              $("#copyNpaste").html(data.copyNpaste.replace(/\n/g, '<br>'));
               $("#output0title").html(titleText);
               $("#output0intro").html(introText);
               $("#output0").html(firstText);
               $("#output0inspired").html(data.inspiredBy);
+              let scratchedText = "We just scratched the surface of " + selected[1] + ".\n\nReady for 3 even greater strategies to help really master it?";
+              scratchedText = scratchedText.replace(/\n/g, '<br>');
+              $("#questionWhichText").html(scratchedText);
               $("#progressBar0").hide();
               $("#output0intro").show();
               $("#output0title").show();
@@ -209,16 +214,11 @@
                 setTimeout(() => { // Show how it works
                   $("#typingAnimation").hide();
                   $("#messageDiv0-5").show();
-                  $("#output0How").html(secondText);
-                  $("#copyNpaste").html(data.copyNpaste.replace(/\n/g, '<br>'));
                   $("#continueReading2").show();
                   smoothScrollBy(60, 1000);
                   $("#message0-5").css("margin-top", "40px");
                   setTimeout(() => { // Show typing
                     $("#questionWhich").css("display", "flex");
-                    let scratchedText = "We just scratched the surface of " + selected[1] + ".\n\nReady for 3 even greater strategies to help really master it?";
-                    scratchedText = scratchedText.replace(/\n/g, '<br>');
-                    $("#questionWhichText").html(scratchedText);
                     smoothScrollBy(30, 1000);
                   }, 4000);
                 }, 5000);
@@ -260,8 +260,8 @@
       // Continue reading second message
       $('#continueReading2').click(function() {
         $('#continueReading2').hide();
-        $("#output0How").html(secondText);
         $("#copyDiv").css("display", "flex");
+        $("#output0How").show();
         mixpanel.track('Continue Reading 2 Click');
         setTimeout(() => { // Show question which
           smoothScrollBy(30, 1000);
