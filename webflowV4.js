@@ -81,6 +81,7 @@
 
       function enterDomain() {
 
+        fbq('trackCustom', 'EnterDomain');
         i = 0;
         x = DOMPurify.sanitize($("#domain").val().trim());
         x = x.replace(/\s/g, ""); // remove spaces
@@ -153,6 +154,7 @@
       function getFirstIdea(selectedID, array) {
 
         mixpanel.track('Click '+ selectedID);
+        fbq('trackCustom', 'GoalSelected');
         if (success != -1) {
           console.log("Function is already running.");
           return;
@@ -263,6 +265,7 @@
         $("#copyDiv").css("display", "flex");
         $("#output0How").show();
         mixpanel.track('Continue Reading 2 Click');
+        fbq('trackCustom', 'ContinueReading');
         setTimeout(() => { // Show question which
           smoothScrollBy(30, 1000);
           $("#typingAnimation2").hide();
@@ -354,6 +357,7 @@
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
         mixpanel.track('Sign Up Interest 1 Click');
+        fbq('trackCustom', 'EmailIntent');
         smoothScrollBy(100, 1000);
       });
 
@@ -367,6 +371,7 @@
         $('#getLater').css('border-color', '#E9F0EC');
         $('#signupDiv').css("display", "flex");
         mixpanel.track('Sign Up Interest 2 Click');
+        fbq('trackCustom', 'EmailIntent');
         smoothScrollBy(100, 1000);
       });
 
@@ -377,6 +382,7 @@
         $('#getLater').css('border-color', '#E9F0EC');
         $("#3ideasDiv").css("display", "flex");
         mixpanel.track('3 More Click');
+        fbq('trackCustom', 'MoreIdeas');
         get3Ideas();
       });
 
@@ -386,6 +392,8 @@
       function subscribeToNewsletter() {
         i = 1;
         var email = DOMPurify.sanitize($("#email").val().trim());
+
+        fbq('trackCustom', 'EmailSubscribe');
         
         // Check if email is ok
         if (email === '' || !email.includes('@') || !email.includes('.')) {
