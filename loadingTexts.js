@@ -34,11 +34,15 @@ var loadingTexts1 = [
 var loadingTexts2 = [
             'Distilling the real issues at hand.', 'Distilling the real issues at hand..', 'Distilling the real issues at hand...',
             'Thinking different.', 'Thinking different..', 'Thinking different...',
+            'This is huge.', 'This is huge..', 'This is huge...',
+            'Scouting the terrain of existing genius.', 'Scouting the terrain of existing genius..', 'Scouting the terrain of existing genius...',
             'Cooking up some insanely great ideas.', 'Cooking up some insanely great ideas..', 'Cooking up some insanely great ideas...',
             'Talking to the folks who truly care about your product.', 'Talking to the folks who truly care about your product..', 'Talking to the folks who truly care about your product...',
             'Just a moment, you\'re going to love what\'s next.', 'Just a moment, you\'re going to love what\'s next..', 'Just a moment, you\'re going to love what\'s next...',
             'Pushing the envelope.', 'Pushing the envelope..', 'Pushing the envelope...',
+            'This is huge.', 'This is huge..', 'This is huge...',
             'Charting the North Star.', 'Charting the North Star..', 'Charting the North Star...',
+            'Infusing it with wonder.', 'Infusing it with wonder..', 'Infusing it with wonder...',
             'Integrating seamlessly.', 'Integrating seamlessly..', 'Integrating seamlessly...',
             'Making it magical.', 'Making it magical..', 'Making it magical...',
             'One more thing.', 'One more thing..', 'One more thing...'
