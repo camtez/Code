@@ -36,14 +36,18 @@ Webflow.push(function () {
           clearInterval(loadingInterval); // Stop loading message
           console.log(data);
           $("#copyNpaste").html(data);
-          $("#feedback").text("Thank you!");
+          if (f) {
+            f = '';
+            $("#feedback").text("");
+            $("#enter").text("Thank you!!")
+          }
           clicked = '';
 
         })
         .catch(error => {
           clearInterval(loadingInterval); // Stop loading message
           console.log(error);
-          $("#feedback").text("That didn't work. Please try again.");
+          //$("#feedback").text("That didn't work. Please try again.");
         });
 
         clearInterval(loadingInterval);
@@ -100,11 +104,13 @@ Webflow.push(function () {
 
   $('#enter').click(function() {
     updateInfo();
+    $("#enter").text("Sending...")
   });
 
   $('#feedback').keydown(function(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
       updateInfo();
+      $("#enter").text("Sending...")
     }
   });
   
