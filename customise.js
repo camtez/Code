@@ -55,6 +55,25 @@ Webflow.push(function () {
     $("#inputElement").hide();
   	$("#successElement").css("display", "flex")
   }
+
+  function toggleElements() {
+    if (clicked == 'more') {
+        $("#moreDiv").css("display", "flex");
+        loadingInterval = startLoadingAnimation('copyNpaste',loadingText)
+        updateInfo();
+        clearInterval(loadingInterval);
+      } else {
+        $("#feedbackDiv").css("display", "flex");
+        if (clicked == 'great') {
+            $("#feedbackQuestion").text('Would you pay $20 per month to provide more information about your product and get more consistently higher-quality insights from AI Steve?');
+        } else if (clicked == 'ok') {
+            $("#feedbackQuestion").text('Who do you think benefits most from Conversion Examples? What could we do better?');
+        } else if (clicked == 'bad') {
+            $("#feedbackQuestion").text('What do you like most about the concept of Conversion Examples? Where are we missing the mark?');
+        }
+        updateInfo();
+      }
+  }
   
   
   // Get URL parametres
@@ -66,36 +85,24 @@ Webflow.push(function () {
 
   // Toggle elements
   $("#defaultDiv").hide();
-  if (clicked == 'more') {
-    $("#moreDiv").css("display", "flex");
-    loadingInterval = startLoadingAnimation('copyNpaste',loadingText)
-    updateInfo();
-    clearInterval(loadingInterval);
-  } else {
-    $("#feedbackDiv").css("display", "flex");
-    if (clicked == 'great') {
-        $("#feedbackQuestion").text('Would you pay $20 per month to provide more information about your product and get more consistently higher-quality insights from AI Steve?');
-    } else if (clicked == 'ok') {
-        $("#feedbackQuestion").text('Who do you think benefits most from Conversion Examples? What could we do better?');
-    } else if (clicked == 'bad') {
-        $("#feedbackQuestion").text('What do you like most about the concept of Conversion Examples? Where are we missing the mark?');
-    }
-    updateInfo();
-  }
+  toggleElements();
 
   $('#greatBtn').click(function() {
     clicked = 'great';
     updateInfo();
+    toggleElements();
   });
 
   $('#okBtn').click(function() {
     clicked = 'ok';
     updateInfo();
+    toggleElements();
   });
 
   $('#badBtn').click(function() {
     clicked = 'bad';
     updateInfo();
+    toggleElements();
   });
 
   $('#shareBtn').click(function() {
