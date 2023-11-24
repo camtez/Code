@@ -96,7 +96,7 @@ Webflow.push(function () {
   });
 
   $('#shareBtn').click(function() {
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText('Check this out: conversionexamples.com');
     $("#shareMsg").show();
     updateInfo();
 
