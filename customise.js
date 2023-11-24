@@ -35,6 +35,7 @@ Webflow.push(function () {
         .then(data => {
           clearInterval(loadingInterval); // Stop loading message
           console.log(data);
+          $("#copyNpasteTitle").show();
           $("#copyNpaste").html(data);
           if (f) {
             f = '';
