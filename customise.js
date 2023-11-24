@@ -84,14 +84,17 @@ Webflow.push(function () {
   }
 
   $('#greatBtn').click(function() {
+    clicked = 'great';
     updateInfo();
   });
 
   $('#okBtn').click(function() {
+    clicked = 'ok';
     updateInfo();
   });
 
   $('#badBtn').click(function() {
+    clicked = 'bad';
     updateInfo();
   });
 
