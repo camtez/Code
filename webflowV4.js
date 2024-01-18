@@ -43,6 +43,7 @@
       let loadingInterval;
       let lastIdeaText = "";
       let lastExampleText = "";
+      let signupOption = 0;
 
 
       // Reusable functions
@@ -384,12 +385,15 @@
 
       // Click get now
       $('#getNow').click(function() {
+        $("#signupIntro").text('This is for email subscribers only (it\'s free)');
+        $("#signupDescription").text('If you liked that insight then you\'ll love my weekly product insight in your email every week, personalised just for ' + companyName);
+        $('#subscribe').text("Continue");
         $("#questionWhich").css("opacity", 0.75);
         $('#getLater').css('border-color', '#E9F0EC');
-        $("#3ideasDiv").css("display", "flex");
-        mixpanel.track('3 More Click');
+        $('#signupDiv').css("display", "flex");
         fbq('trackCustom', 'MoreIdeas');
-        get3Ideas();
+        signupOption = 1;
+        smoothScrollBy(100, 1000);
       });
 
 
@@ -417,9 +421,16 @@
             .then(response => response.json())
             .then(data => {
               contactId = data.contactID;
-              // Redirect to success page
-              window.location.href = 'https://www.conversionexamples.com/one-more-thing';
-            });     
+              if (signupOption === 0) { 
+                // Redirect to success page
+                window.location.href = 'https://www.conversionexamples.com/one-more-thing';
+              } else if (signupOption === 1) {
+                $('#signupDiv').hide();
+                $("#3ideasDiv").css("display", "flex");
+                mixpanel.track('3 More Load');
+                get3Ideas();
+              }
+        });     
       }
 
       // Click subscribe button
