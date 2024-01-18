@@ -447,6 +447,36 @@
         }
       });
 
+
+      // SHARING
+
+      function copyToClipboard(text_to_copy) {
+        if (!navigator.clipboard) {
+            // fallback for older browsers
+            const el = document.createElement('textarea');
+            el.value = text_to_copy;
+            document.body.appendChild(el);
+            el.select();
+            try {
+                document.execCommand('copy');
+                console.log('Copied successfully!');
+            } catch (err) {
+                alert('Hit a snag copying that text. You\'ll have to copy it manually.');
+            }
+            document.body.removeChild(el);
+        } else {
+            navigator.clipboard.writeText(text_to_copy).then(
+                function() {
+                    console.log("Copied successfully!"); // success 
+                }
+            ).catch(
+                function(err) {
+                    alert('Hit a snag copying that text. You\'ll have to copy it manually.'); // error
+                }
+            );
+        }
+      }
+
       // Sharing -> Message2
       function commonShare() {
         copyToClipboard($('#referMsg').val()); // Save to clipboard
