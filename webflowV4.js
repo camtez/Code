@@ -330,6 +330,12 @@
           isFunctionRunning = false;
         });
 
+        // Prep share link
+        const referId = contactId.split(/rec/)[1];
+        const referLink = 'conversionexamples.com/ai?r='+referId;
+        const randomShareText = referralTexts[Math.floor(Math.random() * referralTexts.length)].replace(/\[URL\]/g, referLink)
+        $('#referMsg').val(randomShareText);
+
         // Prep Stripe link
         var webhook = 'https://eolmnwc1sqa2h6o.m.pipedream.net/?url=' + encodeURIComponent(x) + '&priority=' + encodeURIComponent(selected[0]);
         fetch(webhook)
@@ -429,6 +435,27 @@
           subscribeToNewsletter();
         }
       });
+
+      // Sharing -> Message2
+      function commonShare() {
+        copyToClipboard($('#referMsg').val()); // Save to clipboard
+        $('#share1').css('background-color', '#F2ECD2');
+        $('#share1').text('Copied!');
+      }
+
+      $('#share1').click(commonShare); // Copy to clipboard
+      $('#share2').click(function() { // Linkedin
+        commonShare();
+        const linkedinURL = 'https://www.linkedin.com/feed/?shareActive&mini=true&text=' + encodeURIComponent($('#referMsg').val());
+        window.open(linkedinURL, '_blank');
+      });
+      $('#share3').click(function() { // Twitter
+        commonShare();
+        const twitterURL = 'http://twitter.com/share?url=' + encodeURIComponent($('#referMsg').val());
+        window.open(twitterURL, '_blank');
+      });
+      $('#share4').click(commonShare);
+
       
 
     });
