@@ -317,7 +317,7 @@
 
           $("#blueprintsTitle").text("Here's the plan for " + companyName + ".");
           $("#blueprintsIntro").text("I know you don't have time to read through all the generic strategies for " + selected[1] + ".");
-          $("#blueprintsText").text("So I've crafted these 3 top priority insights into actionable Conversion Blueprints™ just for you" + companyName + ".");
+          $("#blueprintsText").text("So I've crafted these 3 top priority insights into actionable Conversion Blueprints™ just for " + companyName + ".");
           $("#blueprintsBenefit1").text("Built on top of our proprietary research into how " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName + " did it");
           $("#blueprintsBenefit2").text("The most important insights you need to be thinking about for " + companyName);
           $("#dontMiss").text("Don't miss your actionable guide to " + selected[2] + " just like " + data[0].productName + ", " + data[1].productName + " and " + data[2].productName);
