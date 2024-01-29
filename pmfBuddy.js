@@ -14,7 +14,7 @@
       if (initial) {
         $("#ctaDiv").hide();
         $("#extraSection").hide();
-        $("#questions").display("flex");
+        $("#questions").css("display", "flex");
       }
       var domain = params.get('d'); // "value1"
       console.log(domain);
@@ -83,7 +83,7 @@
         // If successful
         $("#ctaDiv").hide();
         $("#extraSection").hide();
-        $("#questions").display("flex");
+        $("#questions").css("display", "flex");
 
         // Make automation to signup email
         mixpanel.track('PMF Subscribe');
