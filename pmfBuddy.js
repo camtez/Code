@@ -166,8 +166,10 @@
               $("#market").val(data.market);
               $("#traction").val(data.traction);
 
-              $("#loadingDiv").hide();
-              $("#q3").show();
+              if ($("#loadingDiv").is(":visible")) {
+                $("#loadingDiv").hide();
+                $("#q3").show();
+              }
               
 
           })
@@ -207,7 +209,6 @@
 
         // Check if x is not empty
         if (name === '') {
-            // *** change error message
             $("#errorMsg").text('Please enter your name...');
             $("#errorMsg").show();
             console.log('Name is empty');
@@ -244,19 +245,53 @@
 
       $('#detailsBtn').click(function() {
 
-        companyName = DOMPurify.sanitize($("#company").val().trim());
-        product = DOMPurify.sanitize($("#product").val().trim());
-        market = DOMPurify.sanitize($("#market").val().trim());
-        traction = DOMPurify.sanitize($("#traction").val().trim());
-
+        $("#errorMsg").hide();
+        try {
+          companyName = DOMPurify.sanitize($("#company").val().trim());
+          product = DOMPurify.sanitize($("#product").val().trim());
+          market = DOMPurify.sanitize($("#market").val().trim());
+          traction = DOMPurify.sanitize($("#traction").val().trim());
+        } catch (error) {
+          $("#errorMsg").text('Please complete the information first...');
+          $("#errorMsg").show();
+        }
 
         // Check if x is not empty
         if (companyName != '' && product != '' && market != '' && traction != '') {
-          // *** send an email with today's tip (brevo)
-            // '&name=' + encodeURIComponent(name)
-          $("#stepText").hide();
-          $("#q3").hide();
-          $("#success").css("display", "flex");
+
+          var updatehook = 'https://hook.us1.make.com/qx2bees6cqp1ubqyx5k969bdjzyxtpbn/';
+
+          var data = {
+              email: email,
+              name: name,
+              startupName: companyName,
+              product: product,
+              market: market,
+              traction: traction,
+              i:initial,
+          };
+
+          fetch(updatehook, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log('Success:', data);
+              $("#stepText").hide();
+              $("#q3").hide();
+              $("#success").css("display", "flex");
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+              $("#errorMsg").text('Please try again...');
+              $("#errorMsg").show();
+          });
+
+          
         } else {
           $("#errorMsg").text('Please answer each question...');
           $("#errorMsg").show();
