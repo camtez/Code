@@ -17,7 +17,6 @@
         $("#questions").css("display", "flex");
       }
       var domain = params.get('d'); // "value1"
-      console.log(domain);
       var referrer = params.get('r'); // "value2"
       if (referrer) {
         referrer = 'rec' + referrer;
@@ -34,8 +33,10 @@
       let market = "";
       let product = "";
       let traction = "";
+      let email = "";
       let contactId = "";
       let loadingInterval;
+      let loadingWebsite = false;
 
       var loadingTexts = [    
         'Reading your website.','Reading your website..','Reading your website...',
@@ -69,7 +70,7 @@
 
       function subscribeToNewsletter() {
         i = 1;
-        var email = DOMPurify.sanitize($("#email").val().trim());
+        email = DOMPurify.sanitize($("#email").val().trim().toLowerCase());
 
         fbq('trackCustom', 'EmailSubscribe');
         
@@ -87,8 +88,19 @@
 
         // Make automation to signup email
         mixpanel.track('PMF Subscribe');
-        var pipehook = 'https://eogogekomkr2wza.m.pipedream.net/?email=' + encodeURIComponent(email) + '&x=' + encodeURIComponent(x) + '&r=' + encodeURIComponent(referrer) + '&i=no';
+        var makehook = 'https://hook.us1.make.com/pmr4a5ihmurza3ggl84v2k6ndxp8kh74/?email=?email=' + encodeURIComponent(email) + '&r=' + encodeURIComponent(referrer);
+        fetch(makehook);
+        /*var pipehook = 'https://eogogekomkr2wza.m.pipedream.net/?email=' + encodeURIComponent(email) + '&r=' + encodeURIComponent(referrer) + '&i=no';
+
         fetch(pipehook)
+          .then(response => response.text()) // Use .json() if the response is in JSON format
+          .then(data => {
+              contactId = data;
+              console.log(contactId);
+          })
+          .catch(error => {
+              console.error('There was an error fetching the data:', error);
+          });*/
       }
 
       // Click subscribe button
@@ -141,11 +153,26 @@
         loadingInterval = startLoadingAnimation("loadingText",loadingTexts); // loading text
 
 
-        // *** PRELOAD THE SITE SUMMARY ASYNC in the background
-        webhook = 'https://eon50fnxq1hplnj.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=no' + '&e=' + encodeURIComponent(exampleId);
-        fetch(webhook);
+        loadingWebsite = true;
+        webhook = 'https://eoaf4fskxz4nzod.m.pipedream.net/?x=' + encodeURIComponent(x) + '&i=1' + '&email=' + encodeURIComponent(email);
+        fetch(webhook)
+          .then(response => response.json())
+          .then(data => {
+              loadingWebsite = false;
 
-        // *** After loading change to q3
+              $("#company").val(data.startupName);
+              $("#product").val(data.product);
+              $("#market").val(data.market);
+              $("#traction").val(data.traction);
+
+              $("#loadingDiv").hide();
+              $("#q3").show();
+              
+
+          })
+          .catch(error => {
+              console.error('There was an error fetching the data:', error);
+          });
 
       }
 
@@ -190,12 +217,11 @@
         $("#q2").hide();
         $("#stepText").text("4 of 4");
 
-
-        // *** IF still loading
-        $("#loadingDiv").show();
-        // *** ELSE
-        $("#q3").show();
-        // change text for website
+        if (loadingWebsite) {
+          $("#loadingDiv").show(); // If still waiting for website info to be returned
+        } else {
+          $("#q3").show();
+        }
 
       }
 
@@ -226,7 +252,10 @@
         // Check if x is not empty
         if (companyName != '' && product != '' && market != '' && traction != '') {
           // *** send an email with today's tip (brevo)
+            // '&name=' + encodeURIComponent(name)
           $("#stepText").hide();
+          $("#q3").hide();
+          $("#success").css("display", "flex");
         } else {
           $("#errorMsg").text('Please answer each question...');
           $("#errorMsg").show();
