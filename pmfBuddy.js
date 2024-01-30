@@ -89,7 +89,7 @@
 
         // Make automation to signup email
         mixpanel.track('PMF Subscribe');
-        var makehook = 'https://hook.us1.make.com/pmr4a5ihmurza3ggl84v2k6ndxp8kh74/?email=?email=' + encodeURIComponent(email) + '&r=' + encodeURIComponent(referrer);
+        var makehook = 'https://hook.us1.make.com/pmr4a5ihmurza3ggl84v2k6ndxp8kh74/?email=' + encodeURIComponent(email) + '&r=' + encodeURIComponent(referrer);
         fetch(makehook);
         /*var pipehook = 'https://eogogekomkr2wza.m.pipedream.net/?email=' + encodeURIComponent(email) + '&r=' + encodeURIComponent(referrer) + '&i=no';
 
