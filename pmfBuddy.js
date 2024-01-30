@@ -150,8 +150,6 @@
         $("#q1").hide();
         $("#q2").show();
         $("#stepText").text("3 of 4");
-        startLoadingBar('#progressBar','#filler'); // loading bar
-        loadingInterval = startLoadingAnimation("loadingText",loadingTexts); // loading text
 
 
         loadingWebsite = true;
@@ -221,6 +219,8 @@
 
         if (loadingWebsite) {
           $("#loadingDiv").show(); // If still waiting for website info to be returned
+          startLoadingBar('#progressBar','#filler'); // loading bar
+          loadingInterval = startLoadingAnimation("loadingText",loadingTexts); // loading text
         } else {
           $("#q3").show();
         }
@@ -246,6 +246,7 @@
       $('#detailsBtn').click(function() {
 
         $("#errorMsg").hide();
+        $('#detailsBtn').text('Loading...');
         try {
           companyName = DOMPurify.sanitize($("#company").val().trim());
           product = DOMPurify.sanitize($("#product").val().trim());
@@ -254,7 +255,10 @@
         } catch (error) {
           $("#errorMsg").text('Please complete the information first...');
           $("#errorMsg").show();
+          $('#detailsBtn').text('Try again');
         }
+
+        // *** if i = u then just adjust the success message, send make and dont do anything else
 
         // Check if x is not empty
         if (companyName != '' && product != '' && market != '' && traction != '') {
@@ -282,7 +286,7 @@
           .then(response => response.json())
           .then(data => {
               console.log('Success:', data);
-              $("#stepText").hide();
+              $("#stepDiv").hide();
               $("#q3").hide();
               $("#success").show();
           })
@@ -290,6 +294,7 @@
               console.error('Error:', error);
               $("#errorMsg").text('Please try again...');
               $("#errorMsg").show();
+              $('#detailsBtn').text('Try again');
           });
 
           
