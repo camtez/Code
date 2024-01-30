@@ -263,6 +263,7 @@
 
           var data = {
               email: email,
+              x: x,
               name: name,
               startupName: companyName,
               product: product,
@@ -283,7 +284,7 @@
               console.log('Success:', data);
               $("#stepText").hide();
               $("#q3").hide();
-              $("#success").css("display", "flex");
+              $("#success").show();
           })
           .catch((error) => {
               console.error('Error:', error);
