@@ -7,6 +7,7 @@
 
       var pageTitle = document.title;
       mixpanel.track("PV: " + pageTitle);
+      console.log('Start');
       
       // Get URL parametres
       var params = new URLSearchParams(window.location.search);
