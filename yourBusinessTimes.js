@@ -34,7 +34,7 @@
         }
 
         // If successful
-        $("#enter").text("#success");
+        $("#enter").text("Success!");
 
         // Make automation to signup email
         mixpanel.track('YBT Subscribe');
