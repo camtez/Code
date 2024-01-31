@@ -12,13 +12,12 @@
       // Get URL parametres
       var params = new URLSearchParams(window.location.search);
       var initial = params.get('i');
-      if (initial) {
-        $("#ctaDiv").hide();
-        $("#extraSection").hide();
-        $("#questions").css("display", "flex");
-      }
       var domain = params.get('d'); // "value1"
       var referrer = params.get('r'); // "value2"
+      var contactId = params.get('c');
+      if (contactId) {
+        contactId = 'rec' + contactId;
+      }
       if (referrer) {
         referrer = 'rec' + referrer;
       }
@@ -130,7 +129,6 @@
 
         // Check if x is not empty
         if (x === '' || !x.includes('.')) {
-            // *** change error message
             $("#errorMsg").text('Please enter a valid domain...');
             $("#errorMsg").show();
             console.log('URL is empty');
@@ -172,9 +170,23 @@
 
           })
           .catch(error => {
-              console.error('There was an error fetching the data:', error);
+              console.log('There was an error fetching the data:', error);
+              $("#q3Heading").text("Last few questions (I couldn't read your website unfortunately)");
+              if ($("#loadingDiv").is(":visible")) {
+                $("#loadingDiv").hide();
+                $("#q3").show();
+              }
           });
 
+      }
+
+      // Preload if just updating info
+      if (initial === "u" && domain && contactId) {
+        x = domain;
+        enterDomain();
+        $("#ctaDiv").hide();
+        $("#extraSection").hide();
+        $("#loadingDiv").css("display", "flex");
       }
 
       // Run on enter click
@@ -242,66 +254,76 @@
 
 
       // STEP 3: Save details
+      
+      let saving = false;
 
       $('#detailsBtn').click(function() {
 
-        $("#errorMsg").hide();
-        $('#detailsBtn').text('Loading...');
-        try {
-          companyName = DOMPurify.sanitize($("#company").val().trim());
-          product = DOMPurify.sanitize($("#product").val().trim());
-          market = DOMPurify.sanitize($("#market").val().trim());
-          traction = DOMPurify.sanitize($("#traction").val().trim());
-        } catch (error) {
-          $("#errorMsg").text('Please complete the information first...');
-          $("#errorMsg").show();
-          $('#detailsBtn').text('Try again');
+        if (!saving) {
+          saving = true;
+          $("#errorMsg").hide();
+          $('#detailsBtn').text('Loading...');
+          try {
+            companyName = DOMPurify.sanitize($("#company").val().trim());
+            product = DOMPurify.sanitize($("#product").val().trim());
+            market = DOMPurify.sanitize($("#market").val().trim());
+            traction = DOMPurify.sanitize($("#traction").val().trim());
+          } catch (error) {
+            $("#errorMsg").text('Please complete the information first...');
+            $("#errorMsg").show();
+            $('#detailsBtn').text('Try again');
+            saving = false;
+          }
+
+          // Check if x is not empty
+          if (companyName != '' && product != '' && market != '' && traction != '') {
+
+            var updatehook = 'https://hook.us1.make.com/qx2bees6cqp1ubqyx5k969bdjzyxtpbn/';
+
+            var data = {
+                email: email,
+                x: x,
+                name: name,
+                startupName: companyName,
+                product: product,
+                market: market,
+                traction: traction,
+                i:initial,
+            };
+
+            fetch(updatehook, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                if (i==="u") {
+                  $("#successText").text("Updated your startup profile. Stay tuned for the next PMF reminder.")
+                }
+                $("#stepDiv").hide();
+                $("#q3").hide();
+                $("#success").show();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                $("#errorMsg").text('Please try again...');
+                $("#errorMsg").show();
+                $('#detailsBtn').text('Try again');
+                saving = false;
+            });
+
+            
+          } else {
+            $("#errorMsg").text('Please answer each question...');
+            $("#errorMsg").show();
+            saving = false;
+          }
         }
-
-        // *** if i = u then just adjust the success message, send make and dont do anything else
-
-        // Check if x is not empty
-        if (companyName != '' && product != '' && market != '' && traction != '') {
-
-          var updatehook = 'https://hook.us1.make.com/qx2bees6cqp1ubqyx5k969bdjzyxtpbn/';
-
-          var data = {
-              email: email,
-              x: x,
-              name: name,
-              startupName: companyName,
-              product: product,
-              market: market,
-              traction: traction,
-              i:initial,
-          };
-
-          fetch(updatehook, {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data),
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log('Success:', data);
-              $("#stepDiv").hide();
-              $("#q3").hide();
-              $("#success").show();
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-              $("#errorMsg").text('Please try again...');
-              $("#errorMsg").show();
-              $('#detailsBtn').text('Try again');
-          });
-
-          
-        } else {
-          $("#errorMsg").text('Please answer each question...');
-          $("#errorMsg").show();
-        }
+        
       });
 
   
