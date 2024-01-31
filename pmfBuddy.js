@@ -34,7 +34,6 @@
       let product = "";
       let traction = "";
       let email = "";
-      let contactId = "";
       let loadingInterval;
       let loadingWebsite = false;
 
