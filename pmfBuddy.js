@@ -139,10 +139,10 @@
         if (!x.startsWith('http://') && !x.startsWith('https://')) { // If the input doesn't start with 'http://' or 'https://', add 'https://'
             x = 'https://' + x;
         }
-        var matches = x.match(/https:\/\/[^/]+/); // Remove anything after '.com' or other domain extensions
+        /*var matches = x.match(/https:\/\/[^/]+/); // Remove anything after '.com' or other domain extensions
         if (matches) {
             x = matches[0];
-        }
+        }*/
 
         $("#q1").hide();
         $("#q2").show();
