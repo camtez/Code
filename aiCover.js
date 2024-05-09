@@ -234,7 +234,7 @@ Webflow.push(function () {
 
     // loading animation
     startLoadingBar(`#progressBarChat-${messageCount}`,`#fillerChat-${messageCount}`);
-    loadingInterval = startLoadingAnimation(`#assistantTextChat-${messageCount}`, loadingTexts2);
+    loadingInterval = startLoadingAnimation(`assistantTextChat-${messageCount}`, loadingTexts2);
         
 
     webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=chat&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(message);
@@ -256,6 +256,7 @@ Webflow.push(function () {
     })
     .catch(error => {
       clearInterval(loadingInterval);
+      $(`#progressBarChat-${messageCount}`).hide();
       $(`#assistantTextChat-${messageCount}`).text('Something went wrong sorry. Please try again.');
       isFunctionRunning = false;
       $("#userInputChat").css("display", "flex");
