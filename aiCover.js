@@ -88,7 +88,6 @@ Webflow.push(function () {
       console.log("Function is already running.");
       return;
     }
-    isFunctionRunning = true;
 
     i = 0;
     x = DOMPurify.sanitize($("#url").val().trim());
@@ -99,6 +98,7 @@ Webflow.push(function () {
         console.log('URL is empty');
         return; // Exit the function early
     }
+    isFunctionRunning = true;
 
     // Changes to UI
     $("#userInput1").hide();
