@@ -183,13 +183,14 @@ Webflow.push(function () {
       console.log("Function is already running.");
       return;
     }
-    isFunctionRunning = true;
 
     // Check if message contains 'no more questions'
     if (message.includes('no more questions')) {
       $("#userInputChat").hide();
       return;
     }
+
+    isFunctionRunning = true;
 
     // Changes to UI
     $("#userInputChat").hide();
@@ -225,10 +226,8 @@ Webflow.push(function () {
     document.getElementById("chatContainer").appendChild(cloneAssistant);
 
     // Show the elements once ready
-    /* $(`userMessageChat-${messageCount}`).css("display", "flex"); // Show
-    $(`assistantDivChat-${messageCount}`).css("display", "flex"); */
-    cloneUser.css("display", "flex");
-    cloneAssistant.css("display", "flex");
+    $(`#userMessageChat-${messageCount}`).css("display", "flex"); // Show
+    $(`#assistantDivChat-${messageCount}`).css("display", "flex");
 
 
     smoothScrollBy(100, 1000);
