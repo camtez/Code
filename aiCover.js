@@ -21,6 +21,7 @@ Webflow.push(function () {
   var loadingIndex = 0;
   let messageCount = 0;
   var x = "";
+  let isFunctionRunning = false;
   const errorMessage = "Sorry, looks like something went wrong. Please refresh the page and try again.";
   let airtableId = "";
   let companyName = "";
