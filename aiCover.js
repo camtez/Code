@@ -140,6 +140,7 @@ Webflow.push(function () {
           $("#assistantDivPrompt").css("display", "flex");
           $("#userInputChat").css("display", "flex");
           smoothScrollBy(60, 1000);
+          isFunctionRunning = false;
         }, 5000);
 
       })
@@ -352,7 +353,7 @@ Webflow.push(function () {
 
     // Save to airtable
     webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=feedback&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(feedback);
-    fetch(webhook)
+    fetch(webhook); // No need to do anything with response
 
   }
 
