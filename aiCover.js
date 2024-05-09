@@ -105,6 +105,8 @@ Webflow.push(function () {
     $("#userMessage1").css("display", "flex");
     $("#userText1").text(x);
     $("#assistantDiv1").css("display", "flex");
+    startLoadingBar('#progressBar1','#filler1'); // loading bar
+    loadingInterval = startLoadingAnimation("assistantText1",loadingTexts1); // loading text
     smoothScrollBy(100, 1000);
 
 
@@ -112,9 +114,6 @@ Webflow.push(function () {
     if (!x.startsWith('http://') && !x.startsWith('https://')) { // If the input doesn't start with 'http://' or 'https://', add 'https://'
         x = 'https://' + x;
     }
-
-    startLoadingBar('#progressBar1','#filler1'); // loading bar
-    loadingInterval = startLoadingAnimation("assistantText1",loadingTexts1); // loading text
 
 
     webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=scan&url=' + encodeURIComponent(x);
@@ -187,7 +186,7 @@ Webflow.push(function () {
     isFunctionRunning = true;
 
     // Check if message contains 'no more questions'
-    if (message.contains('no more questions')) {
+    if (message.includes('no more questions')) {
       $("#userInputChat").hide();
       return;
     }
@@ -267,12 +266,12 @@ Webflow.push(function () {
 
   
   $('#suggestionBtn1').click(function() {
-    chatMessage($('#suggestionBtn1').text,2); //*** does this work???? */
+    chatMessage($('#suggestionBtn1').text());
     mixpanel.track('Suggestion Btn 1');
   });
 
   $('#suggestionBtn2').click(function() {
-    chatMessage($('#suggestionBtn2').text,2);
+    chatMessage($('#suggestionBtn2').text());
     mixpanel.track('Suggestion Btn 2');
   });
 
@@ -285,12 +284,12 @@ Webflow.push(function () {
   });
 
   $('#messageEnter').click(function() {
-    chatMessage($('#message').text,2);
+    chatMessage(DOMPurify.sanitize($("#message").val().trim()));
     mixpanel.track('Enter Message Click');
   });
   $('#message').keydown(function(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
-      chatMessage($('#message').text,2);
+      chatMessage(DOMPurify.sanitize($("#message").val().trim()));
       mixpanel.track('Enter Message Keyboard');
     }
   });
@@ -358,12 +357,12 @@ Webflow.push(function () {
   }
 
   $('#feedbackEnter').click(function() {
-    saveFeedback($('#feedback').text);
+    saveFeedback(DOMPurify.sanitize($("#feedback").val().trim()));
     mixpanel.track('Enter Feedback Click');
   });
   $('#feedback').keydown(function(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
-      saveFeedback($('#feedback').text);
+      saveFeedback(DOMPurify.sanitize($("#feedback").val().trim()));
       mixpanel.track('Enter Feedback Keyboard');
     }
   });
