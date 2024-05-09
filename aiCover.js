@@ -124,7 +124,7 @@ Webflow.push(function () {
         clearInterval(loadingInterval); // Stop loading message
         $("#progressBar1").hide();
 
-        // *** save airtable ID
+        airtableId = data.id; // Save airtable id for future calls
 
         companyName = data.productName;
         companyType = data.productType;
@@ -345,7 +345,7 @@ Webflow.push(function () {
     }
 
     $("#userInputFeedback2").hide();
-    $("#userTextFeedback2").text($("#feedback").text());
+    $("#userTextFeedback2").text($("#feedback").val());
     $("#userMessageFeedback2").css("display", "flex");
     $("#assistantDivCta").css("display", "flex");
     $("#userInputCta").css("display", "flex");
