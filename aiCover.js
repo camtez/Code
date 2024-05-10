@@ -185,7 +185,7 @@ Webflow.push(function () {
     }
 
     // Check if message contains 'no more questions'
-    if (message.toLowercase().includes('no more questions')) {
+    if (message.toLowerCase().includes('no more questions')) {
       $("#userInputChat").hide();
       return;
     }
