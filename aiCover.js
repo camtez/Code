@@ -351,7 +351,7 @@ Webflow.push(function () {
     $("#userInputCta").css("display", "flex");
 
     // Save to airtable
-    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=feedback&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(feedback);
+    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=feedback&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(feedback) + '&btn='+ encodeURIComponent($("#userTextFeedback1").text());
     fetch(webhook); // No need to do anything with response
 
   }
