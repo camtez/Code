@@ -107,7 +107,7 @@ Webflow.push(function () {
     $("#assistantDiv1").css("display", "flex");
     startLoadingBar('#progressBar1','#filler1'); // loading bar
     loadingInterval = startLoadingAnimation("assistantText1",loadingTexts1); // loading text
-    smoothScrollBy(100, 1000);
+    smoothScrollBy(50, 1000);
 
 
     // Cleaning input data
@@ -116,7 +116,8 @@ Webflow.push(function () {
     }
 
 
-    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=scan&url=' + encodeURIComponent(x);
+    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?type=scan&url=' + encodeURIComponent(x) + '&code=17jnw5dgs83';
+
     fetch(webhook)
       .then(response => response.json())
       .then(data => {
@@ -138,7 +139,7 @@ Webflow.push(function () {
         setTimeout(() => { // Show NEXT
           $("#assistantDivPrompt").css("display", "flex");
           $("#userInputChat").css("display", "flex");
-          smoothScrollBy(60, 1000);
+          smoothScrollBy(50, 1000);
           isFunctionRunning = false;
         }, 5000);
 
@@ -194,6 +195,7 @@ Webflow.push(function () {
 
     // Changes to UI
     $("#userInputChat").hide();
+    $("#message").val("");
     $("#chatContainer").css("display", "flex");
 
     // Create new user and assistant messages
@@ -237,7 +239,7 @@ Webflow.push(function () {
     loadingInterval = startLoadingAnimation(`assistantTextChat-${messageCount}`, loadingTexts2);
         
 
-    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=chat&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(message);
+    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?type=chat&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(message) + '&code=17jnw5dgs83';
     fetch(webhook)
     .then(response => response.json())
     .then(data => {
@@ -250,7 +252,7 @@ Webflow.push(function () {
 
       setTimeout(() => { // Show input again
         $("#userInputChat").css("display", "flex");
-        smoothScrollBy(60, 1000);
+        smoothScrollBy(50, 1000);
       }, 5000);
 
     })
@@ -281,6 +283,7 @@ Webflow.push(function () {
     $("#userMessageDone").css("display", "flex");
     $("#assistantDivFeedback1").css("display", "flex");
     $("#userInputFeedback1").css("display", "flex");
+    smoothScrollBy(50, 1000);
   });
 
   $('#messageEnter').click(function() {
@@ -313,6 +316,7 @@ Webflow.push(function () {
     // Skip to CTA (not asking for more feedback)
     $("#assistantDivCta").css("display", "flex");
     $("#userInputCta").css("display", "flex");
+    smoothScrollBy(50, 1000);
   });
 
   $('#feedbackBtn2').click(function() {
@@ -323,6 +327,7 @@ Webflow.push(function () {
     $("#userMessageFeedback1").css("display", "flex");
     $("#assistantDivFeedback2").css("display", "flex");
     $("#userInputFeedback2").css("display", "flex");
+    smoothScrollBy(50, 1000);
   });
   
   $('#feedbackBtn3').click(function() {
@@ -333,6 +338,7 @@ Webflow.push(function () {
     $("#userMessageFeedback1").css("display", "flex");
     $("#assistantDivFeedback2").css("display", "flex");
     $("#userInputFeedback2").css("display", "flex");
+    smoothScrollBy(50, 1000);
   });
 
 
@@ -349,9 +355,10 @@ Webflow.push(function () {
     $("#userMessageFeedback2").css("display", "flex");
     $("#assistantDivCta").css("display", "flex");
     $("#userInputCta").css("display", "flex");
+    smoothScrollBy(100, 1000);
 
     // Save to airtable
-    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?code=17jnw5dgs83&type=feedback&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(feedback) + '&btn='+ encodeURIComponent($("#userTextFeedback1").text());
+    webhook = 'https://eo27heg805bqs9f.m.pipedream.net/?type=feedback&id=' + encodeURIComponent(airtableId) + '&message=' + encodeURIComponent(feedback) + '&btn='+ encodeURIComponent($("#userTextFeedback1").text()) + '&code=17jnw5dgs83';
     fetch(webhook); // No need to do anything with response
 
   }
@@ -387,10 +394,6 @@ Webflow.push(function () {
       // *** how to load the feedback below where it was before??
     }
   });
-
-
-  
-
   
 });
     
