@@ -157,7 +157,6 @@ Webflow.push(function () {
     $("#url").val(jobUrl);
     // $("#urlEnter").click(); // Automatically click
     console.log('triggered');
-    enterUrl();
     mixpanel.track('Triggered via url param');
   }
 
